@@ -1,0 +1,33 @@
+{
+  "dataset": "DC Educational Attainment 1960-2020",
+  "project": "Black Data Lab - Edward P. Jones Literary Analysis",
+  "coverage": {
+    "total_population": [1960, 1970, 1980, 1990, 2000, 2010, 2020],
+    "black_population": [1960, 1980, 1990, 2000, 2010, 2020],
+    "missing_1970_black": "Black-specific attainment not available at tract level in 1970 Census"
+  },
+  "geographic_scope": "Washington, DC census tracts",
+  "universe": "Population 25 years and over",
+  "attainment_categories": ["Less than high school", "High school graduate", "Some college/Associate's", "Bachelor's degree+"],
+  "sources": {
+    "total": {
+      "1960": "1960 Census - NBT17 (B6B)",
+      "1970": "1970 Census - NT42 (C2M)",
+      "1980": "1980 Census - NT48B (DHN) aggregated from race categories",
+      "1990": "1990 Census - NP58 (E34) aggregated from race categories",
+      "2000": "2000 Census - NP148C (GRW) aggregated from race categories",
+      "2010": "ACS 2008-2012 - B15002 (QUR)",
+      "2020": "ACS 2018-2022 - B15002 (AQPJ)"
+    },
+    "black": {
+      "1960": "1960 Census - NT31 (B8S) Nonwhite (proxy - DC Nonwhite population was 98% Black)",
+      "1980": "1980 Census - NT48B (DHN006-DHN010)",
+      "1990": "1990 Census - NP58 (E34008-E34014)",
+      "2000": "2000 Census - NP148C (GRW015-GRW028)",
+      "2010": "ACS 2008-2012 - C15002B (Q81)",
+      "2020": "ACS 2018-2022 - C15002B (AQ46)"
+    }
+  },
+  "methodological_notes": ["All categories standardized to 4-level schema for cross-decade comparison", "1970 Black attainment data unavailable at tract level - gap acknowledged", "1960 Black attainment approximated using Nonwhite population (valid for DC)", "ACS 2010 and 2020 data are 5-year estimates, not single-year census counts", "All counts are unweighted NHGIS estimates"],
+  "recommended_use": "For longitudinal analysis of educational attainment patterns in DC neighborhoods, with caution for 1960-1970-1980 break in Black population measurement"
+}

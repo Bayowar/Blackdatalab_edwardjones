@@ -1,0 +1,8 @@
+year,total_deaths,population,mortality_rate_per_100k,source,data_type,geography
+1960,10084,763956,1319.9713072480613,NHGIS 1959-1972 Vital Statistics (NT003),crude_mortality_rate,city
+1970,NA,756510,1170,NHGIS 1970-2007 Vital Statistics (NT005),crude_mortality_rate,city
+1980,NA,638334,1110,NHGIS 1970-2007 Vital Statistics (NT005),crude_mortality_rate,city
+1990,NA,606900,1200,NHGIS 1970-2007 Vital Statistics (NT005),crude_mortality_rate,city
+2000,NA,572056,1050,NHGIS 1970-2007 Vital Statistics (NT005),crude_mortality_rate,city
+2010,4672,601723,776.4,CDC WONDER - Underlying Cause of Death,crude_mortality_rate,city
+2020,6198,712816,869.5,CDC WONDER - Underlying Cause of Death,crude_mortality_rate,city

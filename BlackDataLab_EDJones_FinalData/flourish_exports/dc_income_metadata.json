@@ -1,0 +1,121 @@
+{
+  "project_info": {
+    "project_name": "DC Income Data for Edward P. Jones Literary Analysis",
+    "institution": "Black Data Lab Internship",
+    "completion_date": "2026-04-15"
+  },
+  "data_sources": [
+    {
+      "year": 1960,
+      "source": "1960 Census",
+      "table_code": "B8W",
+      "universe": "Families",
+      "dollar_type": "1959 nominal",
+      "key_notes": "Family income (not households)"
+    },
+    {
+      "year": 1970,
+      "source": "NHGIS Time Series",
+      "table_code": "BS7",
+      "universe": "Households",
+      "dollar_type": "1970 nominal",
+      "key_notes": "4 income brackets"
+    },
+    {
+      "year": 1980,
+      "source": "NHGIS Time Series",
+      "table_code": "BS7",
+      "universe": "Households",
+      "dollar_type": "1980 nominal",
+      "key_notes": "4 income brackets"
+    },
+    {
+      "year": 1990,
+      "source": "NHGIS Time Series",
+      "table_code": "BS7",
+      "universe": "Households",
+      "dollar_type": "1990 nominal",
+      "key_notes": "4 income brackets"
+    },
+    {
+      "year": 2000,
+      "source": "NHGIS Time Series",
+      "table_code": "BS7",
+      "universe": "Households",
+      "dollar_type": "2000 nominal",
+      "key_notes": "4 income brackets"
+    },
+    {
+      "year": 2010,
+      "source": "ACS 2008-2012",
+      "table_code": "B19001",
+      "universe": "Households",
+      "dollar_type": "2012 adjusted",
+      "key_notes": "16→4 brackets"
+    },
+    {
+      "year": 2020,
+      "source": "ACS 2018-2022",
+      "table_code": "B19001",
+      "universe": "Households",
+      "dollar_type": "2022 adjusted",
+      "key_notes": "16→4 brackets"
+    }
+  ],
+  "inflation_adjustment": {
+    "method": "Consumer Price Index for All Urban Consumers (CPI-U)",
+    "base_year": 2020,
+    "source": "Bureau of Labor Statistics, Series CUUR0000SA0",
+    "factors": [
+      {
+        "year": 1960,
+        "cpi_2020": 9.21,
+        "inflation_base": "1959 nominal",
+        "cpi_source": "BLS CPI-U, annual average, 2020=1.00"
+      },
+      {
+        "year": 1970,
+        "cpi_2020": 6.43,
+        "inflation_base": "1970 nominal",
+        "cpi_source": "BLS CPI-U, annual average, 2020=1.00"
+      },
+      {
+        "year": 1980,
+        "cpi_2020": 2.91,
+        "inflation_base": "1980 nominal",
+        "cpi_source": "BLS CPI-U, annual average, 2020=1.00"
+      },
+      {
+        "year": 1990,
+        "cpi_2020": 1.87,
+        "inflation_base": "1990 nominal",
+        "cpi_source": "BLS CPI-U, annual average, 2020=1.00"
+      },
+      {
+        "year": 2000,
+        "cpi_2020": 1.48,
+        "inflation_base": "2000 nominal",
+        "cpi_source": "BLS CPI-U, annual average, 2020=1.00"
+      },
+      {
+        "year": 2010,
+        "cpi_2020": 1.18,
+        "inflation_base": "2012 adjusted",
+        "cpi_source": "BLS CPI-U, annual average, 2020=1.00"
+      },
+      {
+        "year": 2020,
+        "cpi_2020": 1,
+        "inflation_base": "2022 adjusted",
+        "cpi_source": "BLS CPI-U, annual average, 2020=1.00"
+      }
+    ],
+    "purpose": "Enable valid dollar comparisons across decades"
+  },
+  "academic_notes": {
+    "unit_caveat": "1960 data uses families while 1970-2020 uses households",
+    "bracket_mapping": "ACS 16-bracket data mapped to 4 brackets for consistency",
+    "comparison_recommendation": "Use percentages and inflation-adjusted values for cross-decade analysis",
+    "poverty_data": "Poverty rates should come from official poverty tables, not estimated from income distributions"
+  }
+}

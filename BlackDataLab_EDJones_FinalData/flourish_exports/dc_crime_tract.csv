@@ -1,0 +1,389 @@
+fips_full,census_tract,total_crime,violent_crime,property_crime,year,tract_id,geography,source,data_type,tract_join_id,clean_tract,tract_6,ej_loc_cnt,ej_stories,ej_locatns,ej_spaces,ej_setting
+11001001002,001002,62,2,60,2010,001002,tract,DC Open Data Crime Incidents,crime_counts_by_tract,001002,001002,001002,0,NA,NA,NA,NA
+11001001002,001002,80,NA,NA,2020,001002,tract,NA,NA,001002,001002,001002,0,NA,NA,NA,NA
+11001002801,002801,137,50,87,2010,002801,tract,DC Open Data Crime Incidents,crime_counts_by_tract,002801,002801,002801,0,NA,NA,NA,NA
+11001002801,002801,90,NA,NA,2020,002801,tract,NA,NA,002801,002801,002801,0,NA,NA,NA,NA
+11001003100,003100,265,78,187,2010,003100,tract,DC Open Data Crime Incidents,crime_counts_by_tract,003100,003100,003100,0,NA,NA,NA,NA
+11001003100,003100,221,NA,NA,2020,003100,tract,NA,NA,003100,003100,003100,0,NA,NA,NA,NA
+11001004001,004001,128,14,114,2010,004001,tract,DC Open Data Crime Incidents,crime_counts_by_tract,004001,004001,004001,0,NA,NA,NA,NA
+11001004001,004001,87,NA,NA,2020,004001,tract,NA,NA,004001,004001,004001,0,NA,NA,NA,NA
+11001010500,010500,83,21,62,2010,010500,tract,DC Open Data Crime Incidents,crime_counts_by_tract,010500,010500,010500,0,NA,NA,NA,NA
+11001010500,010500,99,NA,NA,2020,010500,tract,NA,NA,010500,010500,010500,0,NA,NA,NA,NA
+11001004600,004600,210,72,138,2010,004600,tract,DC Open Data Crime Incidents,crime_counts_by_tract,004600,004600,004600,6,The First Day | The Store,Narrator's House | Miss Mary and Miss Blondelle's House | Dunbar High School | Narrator's Apartment | New York Avenue NW | New York Avenue & 1st Street NW,Setting | Marker | Route,House | School | Apartment | Street
+11001004600,004600,182,NA,NA,2020,004600,tract,NA,NA,004600,004600,004600,6,The First Day | The Store,Narrator's House | Miss Mary and Miss Blondelle's House | Dunbar High School | Narrator's Apartment | New York Avenue NW | New York Avenue & 1st Street NW,Setting | Marker | Route,House | School | Apartment | Street
+11001008803,008803,264,68,196,2010,008803,tract,DC Open Data Crime Incidents,crime_counts_by_tract,008803,008803,008803,1,The Store,Kentucky's Apartment,Setting,Apartment
+11001008803,008803,406,NA,NA,2020,008803,tract,NA,NA,008803,008803,008803,1,The Store,Kentucky's Apartment,Setting,Apartment
+11001009507,009507,38,5,33,2010,009507,tract,DC Open Data Crime Incidents,crime_counts_by_tract,009507,009507,009507,0,NA,NA,NA,NA
+11001009507,009507,31,NA,NA,2020,009507,tract,NA,NA,009507,009507,009507,0,NA,NA,NA,NA
+11001009509,009509,77,17,60,2010,009509,tract,DC Open Data Crime Incidents,crime_counts_by_tract,009509,009509,009509,0,NA,NA,NA,NA
+11001009509,009509,47,NA,NA,2020,009509,tract,NA,NA,009509,009509,009509,0,NA,NA,NA,NA
+11001005303,005303,83,NA,NA,2020,005303,tract,NA,NA,005303,005303,005303,2,Young Lions,Massachusetts Avenue NW | Massachusetts Avenue & 17th Street NW,Route,Street
+11001010202,010202,176,NA,NA,2020,010202,tract,NA,NA,010202,010202,010202,5,An Orange Line Train to Ballston | Lost in the City | His Mother's House,Smithsonian Metro Stop | Southwest | G Street SW | 7th Street SW | Flagship,Setting | Zone of Action | Route,Subway Station | Quadrant | Street | Restaurant
+11001005003,005003,77,NA,NA,2020,005003,tract,NA,NA,005003,005003,005003,1,Marie,13th Street NW,Setting,Street
+11001010201,010201,74,NA,NA,2020,010201,tract,NA,NA,010201,010201,010201,0,NA,NA,NA,NA
+11001000101,000101,31,NA,NA,2020,000101,tract,NA,NA,000101,000101,000101,0,NA,NA,NA,NA
+11001003702,003702,4,3,1,2010,003702,tract,DC Open Data Crime Incidents,crime_counts_by_tract,003702,003702,003702,0,NA,NA,NA,NA
+11001003702,003702,83,NA,NA,2020,003702,tract,NA,NA,003702,003702,003702,0,NA,NA,NA,NA
+11001008100,008100,106,8,98,2010,008100,tract,DC Open Data Crime Incidents,crime_counts_by_tract,008100,008100,008100,3,The Night Rhonda Ferguson Was Killed | Gospel,East Capitol Street NE | Party House | Massachusetts Avenue NW,Route | Setting,Street | House
+11001008100,008100,110,NA,NA,2020,008100,tract,NA,NA,008100,008100,008100,3,The Night Rhonda Ferguson Was Killed | Gospel,East Capitol Street NE | Party House | Massachusetts Avenue NW,Route | Setting,Street | House
+11001000502,000502,62,5,57,2010,000502,tract,DC Open Data Crime Incidents,crime_counts_by_tract,000502,000502,000502,0,NA,NA,NA,NA
+11001000502,000502,49,NA,NA,2020,000502,tract,NA,NA,000502,000502,000502,0,NA,NA,NA,NA
+11001001401,001401,56,5,51,2010,001401,tract,DC Open Data Crime Incidents,crime_counts_by_tract,001401,001401,001401,0,NA,NA,NA,NA
+11001001401,001401,58,NA,NA,2020,001401,tract,NA,NA,001401,001401,001401,0,NA,NA,NA,NA
+11001001901,001901,170,25,145,2010,001901,tract,DC Open Data Crime Incidents,crime_counts_by_tract,001901,001901,001901,0,NA,NA,NA,NA
+11001001901,001901,191,NA,NA,2020,001901,tract,NA,NA,001901,001901,001901,0,NA,NA,NA,NA
+11001002202,002202,128,37,91,2010,002202,tract,DC Open Data Crime Incidents,crime_counts_by_tract,002202,002202,002202,0,NA,NA,NA,NA
+11001002202,002202,101,NA,NA,2020,002202,tract,NA,NA,002202,002202,002202,0,NA,NA,NA,NA
+11001002702,002702,214,48,166,2010,002702,tract,DC Open Data Crime Incidents,crime_counts_by_tract,002702,002702,002702,0,NA,NA,NA,NA
+11001002702,002702,223,NA,NA,2020,002702,tract,NA,NA,002702,002702,002702,0,NA,NA,NA,NA
+11001003302,003302,80,17,63,2010,003302,tract,DC Open Data Crime Incidents,crime_counts_by_tract,003302,003302,003302,0,NA,NA,NA,NA
+11001003302,003302,103,NA,NA,2020,003302,tract,NA,NA,003302,003302,003302,0,NA,NA,NA,NA
+11001004801,004801,191,47,144,2010,004801,tract,DC Open Data Crime Incidents,crime_counts_by_tract,004801,004801,004801,10,The Girl Who Raised Pigeons | The Store | The Sunday Following Mother's Day | Lost in the City,Howard Theater | Al?s and Penny?s Groceries | Bundy Elementary School | 5th Street & O Street NW | 5th Street NW | Q Street NW | O Street NW | Agnes's Family Home,Setting | Marker | Route,Theater | Store | School | Street | House
+11001004801,004801,147,NA,NA,2020,004801,tract,NA,NA,004801,004801,004801,10,The Girl Who Raised Pigeons | The Store | The Sunday Following Mother's Day | Lost in the City,Howard Theater | Al?s and Penny?s Groceries | Bundy Elementary School | 5th Street & O Street NW | 5th Street NW | Q Street NW | O Street NW | Agnes's Family Home,Setting | Marker | Route,Theater | Store | School | Street | House
+11001010800,010800,201,14,187,2010,010800,tract,DC Open Data Crime Incidents,crime_counts_by_tract,010800,010800,010800,1,The Girl Who Raised Pigeons,Interior Department,Projected Space,Government Office
+11001010800,010800,128,NA,NA,2020,010800,tract,NA,NA,010800,010800,010800,1,The Girl Who Raised Pigeons,Interior Department,Projected Space,Government Office
+11001006801,006801,89,24,65,2010,006801,tract,DC Open Data Crime Incidents,crime_counts_by_tract,006801,006801,006801,2,An Orange Line Train to Ballston | A New Man,19th Street | Independence Street and 15th Street NW,Route | Setting,Street
+11001006801,006801,84,NA,NA,2020,006801,tract,NA,NA,006801,006801,006801,2,An Orange Line Train to Ballston | A New Man,19th Street | Independence Street and 15th Street NW,Route | Setting,Street
+11001007406,007406,149,58,91,2010,007406,tract,DC Open Data Crime Incidents,crime_counts_by_tract,007406,007406,007406,0,NA,NA,NA,NA
+11001007406,007406,89,NA,NA,2020,007406,tract,NA,NA,007406,007406,007406,0,NA,NA,NA,NA
+11001007503,007503,171,65,106,2010,007503,tract,DC Open Data Crime Incidents,crime_counts_by_tract,007503,007503,007503,9,The Girl Who Raised Pigeons | The Night Rhonda Ferguson Was Killed | The Store | The Sunday Following Mother's Day | A Butterfly on F Street | A New Man,Anacostia | Gladys?s Father's House | Curtis Brother's | The House of Agnes and Maddie | Cleansing Waters Baptist Church | Sam and Hazel?s House | Elizabeth's House,Zone of Action | Setting | Marker,Neighborhood | House | Store | Business | Church
+11001007503,007503,193,NA,NA,2020,007503,tract,NA,NA,007503,007503,007503,9,The Girl Who Raised Pigeons | The Night Rhonda Ferguson Was Killed | The Store | The Sunday Following Mother's Day | A Butterfly on F Street | A New Man,Anacostia | Gladys?s Father's House | Curtis Brother's | The House of Agnes and Maddie | Cleansing Waters Baptist Church | Sam and Hazel?s House | Elizabeth's House,Zone of Action | Setting | Marker,Neighborhood | House | Store | Business | Church
+11001007709,007709,78,16,62,2010,007709,tract,DC Open Data Crime Incidents,crime_counts_by_tract,007709,007709,007709,0,NA,NA,NA,NA
+11001007709,007709,115,NA,NA,2020,007709,tract,NA,NA,007709,007709,007709,0,NA,NA,NA,NA
+11001007903,007903,122,29,93,2010,007903,tract,DC Open Data Crime Incidents,crime_counts_by_tract,007903,007903,007903,1,A New Man,21st Street NW,Setting,Street
+11001007903,007903,142,NA,NA,2020,007903,tract,NA,NA,007903,007903,007903,1,A New Man,21st Street NW,Setting,Street
+11001009700,009700,140,50,90,2010,009700,tract,DC Open Data Crime Incidents,crime_counts_by_tract,009700,009700,009700,0,NA,NA,NA,NA
+11001009700,009700,79,NA,NA,2020,009700,tract,NA,NA,009700,009700,009700,0,NA,NA,NA,NA
+11001009807,009807,226,61,165,2010,009807,tract,DC Open Data Crime Incidents,crime_counts_by_tract,009807,009807,009807,0,NA,NA,NA,NA
+11001009807,009807,143,NA,NA,2020,009807,tract,NA,NA,009807,009807,009807,0,NA,NA,NA,NA
+11001009907,009907,122,35,87,2010,009907,tract,DC Open Data Crime Incidents,crime_counts_by_tract,009907,009907,009907,0,NA,NA,NA,NA
+11001009907,009907,71,NA,NA,2020,009907,tract,NA,NA,009907,009907,009907,0,NA,NA,NA,NA
+11001002802,002802,300,75,225,2010,002802,tract,DC Open Data Crime Incidents,crime_counts_by_tract,002802,002802,002802,2,Young Lions,Sixteenth Street | Sherman's Apartment,Marker | Setting,Street | Apartment
+11001002802,002802,282,NA,NA,2020,002802,tract,NA,NA,002802,002802,002802,2,Young Lions,Sixteenth Street | Sherman's Apartment,Marker | Setting,Street | Apartment
+11001000904,000904,63,NA,NA,2020,000904,tract,NA,NA,000904,000904,000904,0,NA,NA,NA,NA
+11001005802,005802,531,NA,NA,2020,005802,tract,NA,NA,005802,005802,005802,18,The Girl Who Raised Pigeons | Young Lions | An Orange Line Train to Ballston | The Sunday Following Mother's Day | His Mother's House | A Butterfly on F Street,"Library Park | Smithsonian | C&P Telephone Company | Martin Luther King, Jr. Memorial Library | Diner | Woodie?s | Becker?s | F Street NW | 12th Street NW` | 13th Street NW | Garfinkel's | Morton?s | Woolworth?s | Kitt?s Music Store",Setting | Marker | Route,Park | Museum | Business | Library | Restaurant | Street | Store
+11001011001,011001,36,NA,NA,2020,011001,tract,NA,NA,011001,011001,011001,0,NA,NA,NA,NA
+11001002504,002504,101,NA,NA,2020,002504,tract,NA,NA,002504,002504,002504,0,NA,NA,NA,NA
+11001000803,000803,10,NA,NA,2020,000803,tract,NA,NA,000803,000803,000803,0,NA,NA,NA,NA
+11001005801,005801,157,NA,NA,2020,005801,tract,NA,NA,005801,005801,005801,2,The Store | His Mother's House,F Street NW | 5th Street NW,Projected Space | Setting,Street
+11001000400,000400,74,4,70,2010,000400,tract,DC Open Data Crime Incidents,crime_counts_by_tract,000400,000400,000400,0,NA,NA,NA,NA
+11001000400,000400,45,NA,NA,2020,000400,tract,NA,NA,000400,000400,000400,0,NA,NA,NA,NA
+11001002501,002501,125,50,75,2010,002501,tract,DC Open Data Crime Incidents,crime_counts_by_tract,002501,002501,002501,0,NA,NA,NA,NA
+11001002501,002501,115,NA,NA,2020,002501,tract,NA,NA,002501,002501,002501,0,NA,NA,NA,NA
+11001006802,006802,52,8,44,2010,006802,tract,DC Open Data Crime Incidents,crime_counts_by_tract,006802,006802,006802,1,An Orange Line Train to Ballston,Potomac Avenue,Route,Street
+11001006802,006802,79,NA,NA,2020,006802,tract,NA,NA,006802,006802,006802,1,An Orange Line Train to Ballston,Potomac Avenue,Route,Street
+11001007807,007807,151,38,113,2010,007807,tract,DC Open Data Crime Incidents,crime_counts_by_tract,007807,007807,007807,0,NA,NA,NA,NA
+11001007807,007807,188,NA,NA,2020,007807,tract,NA,NA,007807,007807,007807,0,NA,NA,NA,NA
+11001007000,007000,214,31,183,2010,007000,tract,DC Open Data Crime Incidents,crime_counts_by_tract,007000,007000,007000,0,NA,NA,NA,NA
+11001007000,007000,170,NA,NA,2020,007000,tract,NA,NA,007000,007000,007000,0,NA,NA,NA,NA
+11001006500,006500,110,12,98,2010,006500,tract,DC Open Data Crime Incidents,crime_counts_by_tract,006500,006500,006500,0,NA,NA,NA,NA
+11001006500,006500,126,NA,NA,2020,006500,tract,NA,NA,006500,006500,006500,0,NA,NA,NA,NA
+11001006900,006900,160,21,139,2010,006900,tract,DC Open Data Crime Incidents,crime_counts_by_tract,006900,006900,006900,1,An Orange Line Train to Ballston,Kentucky Avenue,Route,Street
+11001006900,006900,171,NA,NA,2020,006900,tract,NA,NA,006900,006900,006900,1,An Orange Line Train to Ballston,Kentucky Avenue,Route,Street
+11001008001,008001,149,21,128,2010,008001,tract,DC Open Data Crime Incidents,crime_counts_by_tract,008001,008001,008001,1,Marie,13th Stree & D Street NE,Setting,Street
+11001008001,008001,154,NA,NA,2020,008001,tract,NA,NA,008001,008001,008001,1,Marie,13th Stree & D Street NE,Setting,Street
+11001001303,001303,108,NA,NA,2020,001303,tract,NA,NA,001303,001303,001303,0,NA,NA,NA,NA
+11001010601,010601,263,NA,NA,2020,010601,tract,NA,NA,010601,010601,010601,0,NA,NA,NA,NA
+11001004703,004703,142,NA,NA,2020,004703,tract,NA,NA,004703,004703,004703,5,The Girl Who Raised Pigeons | The Store | Lost in the City,Miles Patterson's House | Peoples Drug | New York Avenue & 5th Street NW | K Street NW,Setting | Marker | Route,House | Store | Street
+11001003901,003901,112,NA,NA,2020,003901,tract,NA,NA,003901,003901,003901,0,NA,NA,NA,NA
+11001002201,002201,103,34,69,2010,002201,tract,DC Open Data Crime Incidents,crime_counts_by_tract,002201,002201,002201,0,NA,NA,NA,NA
+11001002201,002201,101,NA,NA,2020,002201,tract,NA,NA,002201,002201,002201,0,NA,NA,NA,NA
+11001007901,007901,215,65,150,2010,007901,tract,DC Open Data Crime Incidents,crime_counts_by_tract,007901,007901,007901,0,NA,NA,NA,NA
+11001007901,007901,231,NA,NA,2020,007901,tract,NA,NA,007901,007901,007901,0,NA,NA,NA,NA
+11001009203,009203,102,19,83,2010,009203,tract,DC Open Data Crime Incidents,crime_counts_by_tract,009203,009203,009203,0,NA,NA,NA,NA
+11001009203,009203,94,NA,NA,2020,009203,tract,NA,NA,009203,009203,009203,0,NA,NA,NA,NA
+11001005601,005601,89,NA,NA,2020,005601,tract,NA,NA,005601,005601,005601,1,Lost in the City,George Washington Hospital,Setting,Hospital
+11001004704,004704,3,2,1,2010,004704,tract,DC Open Data Crime Incidents,crime_counts_by_tract,004704,004704,004704,8,The Girl Who Raised Pigeons | The First Day | The Sunday Following Mother's Day,Ralph?s L Street House | Mt. Airy Baptist Church | New York Avenue NW | Pierce Street NW | L Street NW | K Street NW | Walker-Jones Elementary School,Setting | Marker | Route,House | Church | Street | School
+11001004704,004704,74,NA,NA,2020,004704,tract,NA,NA,004704,004704,004704,8,The Girl Who Raised Pigeons | The First Day | The Sunday Following Mother's Day,Ralph?s L Street House | Mt. Airy Baptist Church | New York Avenue NW | Pierce Street NW | L Street NW | K Street NW | Walker-Jones Elementary School,Setting | Marker | Route,House | Church | Street | School
+11001003902,003902,63,NA,NA,2020,003902,tract,NA,NA,003902,003902,003902,0,NA,NA,NA,NA
+11001001003,001003,49,NA,NA,2020,001003,tract,NA,NA,001003,001003,001003,0,NA,NA,NA,NA
+11001009504,009504,148,19,129,2010,009504,tract,DC Open Data Crime Incidents,crime_counts_by_tract,009504,009504,009504,0,NA,NA,NA,NA
+11001009504,009504,135,NA,NA,2020,009504,tract,NA,NA,009504,009504,009504,0,NA,NA,NA,NA
+11001001804,001804,192,39,153,2010,001804,tract,DC Open Data Crime Incidents,crime_counts_by_tract,001804,001804,001804,0,NA,NA,NA,NA
+11001001804,001804,126,NA,NA,2020,001804,tract,NA,NA,001804,001804,001804,0,NA,NA,NA,NA
+11001010100,010100,386,44,342,2010,010100,tract,DC Open Data Crime Incidents,crime_counts_by_tract,010100,010100,010100,13,Young Lions | An Orange Line Train to Ballston | The Sunday Following Mother's Day | Lost in the City | Marie,Riggs Bank | M Street NW | McPherson Square Metro Stop | 14th Street NW | Franklin Square Park | 13th Street NW | Thompson School | Franklin Square | McPherson Square | The Buckingham | Trader Vic?s | 14th Street and K Street NW,Setting | Route,Bank | Street | Subway Station | Park | School | Hotel | Restaurant | Bus Stop
+11001010100,010100,358,NA,NA,2020,010100,tract,NA,NA,010100,010100,010100,13,Young Lions | An Orange Line Train to Ballston | The Sunday Following Mother's Day | Lost in the City | Marie,Riggs Bank | M Street NW | McPherson Square Metro Stop | 14th Street NW | Franklin Square Park | 13th Street NW | Thompson School | Franklin Square | McPherson Square | The Buckingham | Trader Vic?s | 14th Street and K Street NW,Setting | Route,Bank | Street | Subway Station | Park | School | Hotel | Restaurant | Bus Stop
+11001009604,009604,92,14,78,2010,009604,tract,DC Open Data Crime Incidents,crime_counts_by_tract,009604,009604,009604,1,The Store,Benning Road,Setting,Street
+11001009604,009604,86,NA,NA,2020,009604,tract,NA,NA,009604,009604,009604,1,The Store,Benning Road,Setting,Street
+11001010602,010602,336,NA,NA,2020,010602,tract,NA,NA,010602,010602,010602,1,The Night Rhonda Ferguson Was Killed,8th and H Streets NE,Route,Street
+11001006400,006400,123,35,88,2010,006400,tract,DC Open Data Crime Incidents,crime_counts_by_tract,006400,006400,006400,0,NA,NA,NA,NA
+11001006400,006400,84,NA,NA,2020,006400,tract,NA,NA,006400,006400,006400,0,NA,NA,NA,NA
+11001004201,004201,98,20,78,2010,004201,tract,DC Open Data Crime Incidents,crime_counts_by_tract,004201,004201,004201,0,NA,NA,NA,NA
+11001004201,004201,82,NA,NA,2020,004201,tract,NA,NA,004201,004201,004201,0,NA,NA,NA,NA
+11001008402,008402,211,47,164,2010,008402,tract,DC Open Data Crime Incidents,crime_counts_by_tract,008402,008402,008402,3,The Night Rhonda Ferguson Was Killed | The Store | Lost in the City,Mile Long,Setting | Marker,Restaurant
+11001008402,008402,179,NA,NA,2020,008402,tract,NA,NA,008402,008402,008402,3,The Night Rhonda Ferguson Was Killed | The Store | Lost in the City,Mile Long,Setting | Marker,Restaurant
+11001009802,009802,66,19,47,2010,009802,tract,DC Open Data Crime Incidents,crime_counts_by_tract,009802,009802,009802,0,NA,NA,NA,NA
+11001009802,009802,62,NA,NA,2020,009802,tract,NA,NA,009802,009802,009802,0,NA,NA,NA,NA
+11001008804,008804,151,41,110,2010,008804,tract,DC Open Data Crime Incidents,crime_counts_by_tract,008804,008804,008804,0,NA,NA,NA,NA
+11001008804,008804,220,NA,NA,2020,008804,tract,NA,NA,008804,008804,008804,0,NA,NA,NA,NA
+11001009803,009803,194,44,150,2010,009803,tract,DC Open Data Crime Incidents,crime_counts_by_tract,009803,009803,009803,0,NA,NA,NA,NA
+11001009803,009803,106,NA,NA,2020,009803,tract,NA,NA,009803,009803,009803,0,NA,NA,NA,NA
+11001002102,002102,216,44,172,2010,002102,tract,DC Open Data Crime Incidents,crime_counts_by_tract,002102,002102,002102,0,NA,NA,NA,NA
+11001002102,002102,144,NA,NA,2020,002102,tract,NA,NA,002102,002102,002102,0,NA,NA,NA,NA
+11001004901,004901,126,38,88,2010,004901,tract,DC Open Data Crime Incidents,crime_counts_by_tract,004901,004901,004901,10,The Night Rhonda Ferguson Was Killed | Young Lions | The Sunday Following Mother's Day | Gospel | A New Man,P Street NW | Shiloh Baptist Church | Joyce and Pearl's Apartment | French Street NW | 9th Street NW | Caesar's Childhood Home | 11th Street NW | Cleopatra?s Hair Emporium | S Street NW | Woodrow's Apartment,Route | Marker | Setting | NA,Street | Church | Apartment | House | Business
+11001004901,004901,156,NA,NA,2020,004901,tract,NA,NA,004901,004901,004901,10,The Night Rhonda Ferguson Was Killed | Young Lions | The Sunday Following Mother's Day | Gospel | A New Man,P Street NW | Shiloh Baptist Church | Joyce and Pearl's Apartment | French Street NW | 9th Street NW | Caesar's Childhood Home | 11th Street NW | Cleopatra?s Hair Emporium | S Street NW | Woodrow's Apartment,Route | Marker | Setting | NA,Street | Church | Apartment | House | Business
+11001008302,008302,143,24,119,2010,008302,tract,DC Open Data Crime Incidents,crime_counts_by_tract,008302,008302,008302,1,The Night Rhonda Ferguson Was Killed,8th Street NE,Route,Street
+11001008302,008302,199,NA,NA,2020,008302,tract,NA,NA,008302,008302,008302,1,The Night Rhonda Ferguson Was Killed,8th Street NE,Route,Street
+11001005502,005502,165,NA,NA,2020,005502,tract,NA,NA,005502,005502,005502,6,Young Lions | The Sunday Following Mother's Day,Dupont Circle NW | American Security | Dupont Circle Park | Peoples Drug | Dupont Circle | Hartnett Hall,Route | Setting | Marker,Street | Bank | Park | Store | House
+11001009901,009901,96,20,76,2010,009901,tract,DC Open Data Crime Incidents,crime_counts_by_tract,009901,009901,009901,0,NA,NA,NA,NA
+11001009901,009901,98,NA,NA,2020,009901,tract,NA,NA,009901,009901,009901,0,NA,NA,NA,NA
+11001007504,007504,201,69,132,2010,007504,tract,DC Open Data Crime Incidents,crime_counts_by_tract,007504,007504,007504,1,The Night Rhonda Ferguson Was Killed,Anacostia,Zone of Action,Neighborhood
+11001007504,007504,95,NA,NA,2020,007504,tract,NA,NA,007504,007504,007504,1,The Night Rhonda Ferguson Was Killed,Anacostia,Zone of Action,Neighborhood
+11001004002,004002,208,46,162,2010,004002,tract,DC Open Data Crime Incidents,crime_counts_by_tract,004002,004002,004002,0,NA,NA,NA,NA
+11001004002,004002,115,NA,NA,2020,004002,tract,NA,NA,004002,004002,004002,0,NA,NA,NA,NA
+11001005900,005900,126,21,105,2010,005900,tract,DC Open Data Crime Incidents,crime_counts_by_tract,005900,005900,005900,1,His Mother's House,Judiciary House,Setting,Apartment
+11001005900,005900,102,NA,NA,2020,005900,tract,NA,NA,005900,005900,005900,1,His Mother's House,Judiciary House,Setting,Apartment
+11001006700,006700,158,14,144,2010,006700,tract,DC Open Data Crime Incidents,crime_counts_by_tract,006700,006700,006700,1,Gospel,Diane's House,Setting,House
+11001006700,006700,119,NA,NA,2020,006700,tract,NA,NA,006700,006700,006700,1,Gospel,Diane's House,Setting,House
+11001007403,007403,150,46,104,2010,007403,tract,DC Open Data Crime Incidents,crime_counts_by_tract,007403,007403,007403,0,NA,NA,NA,NA
+11001007403,007403,99,NA,NA,2020,007403,tract,NA,NA,007403,007403,007403,0,NA,NA,NA,NA
+11001007301,007301,2,0,2,2010,007301,tract,DC Open Data Crime Incidents,crime_counts_by_tract,007301,007301,007301,0,NA,NA,NA,NA
+11001007301,007301,1,NA,NA,2020,007301,tract,NA,NA,007301,007301,007301,0,NA,NA,NA,NA
+11001007502,007502,234,84,150,2010,007502,tract,DC Open Data Crime Incidents,crime_counts_by_tract,007502,007502,007502,0,NA,NA,NA,NA
+11001007502,007502,205,NA,NA,2020,007502,tract,NA,NA,007502,007502,007502,0,NA,NA,NA,NA
+11001007707,007707,219,76,143,2010,007707,tract,DC Open Data Crime Incidents,crime_counts_by_tract,007707,007707,007707,0,NA,NA,NA,NA
+11001007707,007707,181,NA,NA,2020,007707,tract,NA,NA,007707,007707,007707,0,NA,NA,NA,NA
+11001007803,007803,248,69,179,2010,007803,tract,DC Open Data Crime Incidents,crime_counts_by_tract,007803,007803,007803,0,NA,NA,NA,NA
+11001007803,007803,278,NA,NA,2020,007803,tract,NA,NA,007803,007803,007803,0,NA,NA,NA,NA
+11001008002,008002,166,19,147,2010,008002,tract,DC Open Data Crime Incidents,crime_counts_by_tract,008002,008002,008002,3,An Orange Line Train to Ballston | Gospel | A New Man,North Carolina Avenue | Lincoln Park,Route | Marker | Zone of Action,Street | Park
+11001008002,008002,141,NA,NA,2020,008002,tract,NA,NA,008002,008002,008002,3,An Orange Line Train to Ballston | Gospel | A New Man,North Carolina Avenue | Lincoln Park,Route | Marker | Zone of Action,Street | Park
+11001008410,008410,130,14,116,2010,008410,tract,DC Open Data Crime Incidents,crime_counts_by_tract,008410,008410,008410,0,NA,NA,NA,NA
+11001008410,008410,187,NA,NA,2020,008410,tract,NA,NA,008410,008410,008410,0,NA,NA,NA,NA
+11001008802,008802,260,61,199,2010,008802,tract,DC Open Data Crime Incidents,crime_counts_by_tract,008802,008802,008802,0,NA,NA,NA,NA
+11001008802,008802,283,NA,NA,2020,008802,tract,NA,NA,008802,008802,008802,0,NA,NA,NA,NA
+11001008904,008904,181,53,128,2010,008904,tract,DC Open Data Crime Incidents,crime_counts_by_tract,008904,008904,008904,0,NA,NA,NA,NA
+11001008904,008904,157,NA,NA,2020,008904,tract,NA,NA,008904,008904,008904,0,NA,NA,NA,NA
+11001009801,009801,96,23,73,2010,009801,tract,DC Open Data Crime Incidents,crime_counts_by_tract,009801,009801,009801,0,NA,NA,NA,NA
+11001009801,009801,65,NA,NA,2020,009801,tract,NA,NA,009801,009801,009801,0,NA,NA,NA,NA
+11001009301,009301,214,34,180,2010,009301,tract,DC Open Data Crime Incidents,crime_counts_by_tract,009301,009301,009301,0,NA,NA,NA,NA
+11001009301,009301,199,NA,NA,2020,009301,tract,NA,NA,009301,009301,009301,0,NA,NA,NA,NA
+11001009302,009302,81,16,65,2010,009302,tract,DC Open Data Crime Incidents,crime_counts_by_tract,009302,009302,009302,0,NA,NA,NA,NA
+11001009302,009302,70,NA,NA,2020,009302,tract,NA,NA,009302,009302,009302,0,NA,NA,NA,NA
+11001009505,009505,125,22,103,2010,009505,tract,DC Open Data Crime Incidents,crime_counts_by_tract,009505,009505,009505,1,Young Lions,New Hampshire Avenue,Marker,Street
+11001009505,009505,188,NA,NA,2020,009505,tract,NA,NA,009505,009505,009505,1,Young Lions,New Hampshire Avenue,Marker,Street
+11001009811,009811,234,62,172,2010,009811,tract,DC Open Data Crime Incidents,crime_counts_by_tract,009811,009811,009811,0,NA,NA,NA,NA
+11001009811,009811,114,NA,NA,2020,009811,tract,NA,NA,009811,009811,009811,0,NA,NA,NA,NA
+11001009903,009903,89,22,67,2010,009903,tract,DC Open Data Crime Incidents,crime_counts_by_tract,009903,009903,009903,0,NA,NA,NA,NA
+11001009903,009903,73,NA,NA,2020,009903,tract,NA,NA,009903,009903,009903,0,NA,NA,NA,NA
+11001009400,009400,154,21,133,2010,009400,tract,DC Open Data Crime Incidents,crime_counts_by_tract,009400,009400,009400,0,NA,NA,NA,NA
+11001009400,009400,160,NA,NA,2020,009400,tract,NA,NA,009400,009400,009400,0,NA,NA,NA,NA
+11001000201,000201,69,6,63,2010,000201,tract,DC Open Data Crime Incidents,crime_counts_by_tract,000201,000201,000201,2,The Store | The Sunday Following Mother's Day,Georgetown University | Georgetown Medical School,Setting,College | University
+11001000201,000201,17,NA,NA,2020,000201,tract,NA,NA,000201,000201,000201,2,The Store | The Sunday Following Mother's Day,Georgetown University | Georgetown Medical School,Setting,College | University
+11001001200,001200,173,13,160,2010,001200,tract,DC Open Data Crime Incidents,crime_counts_by_tract,001200,001200,001200,0,NA,NA,NA,NA
+11001001200,001200,89,NA,NA,2020,001200,tract,NA,NA,001200,001200,001200,0,NA,NA,NA,NA
+11001010300,010300,89,16,73,2010,010300,tract,DC Open Data Crime Incidents,crime_counts_by_tract,010300,010300,010300,0,NA,NA,NA,NA
+11001010300,010300,121,NA,NA,2020,010300,tract,NA,NA,010300,010300,010300,0,NA,NA,NA,NA
+11001001902,001902,109,14,95,2010,001902,tract,DC Open Data Crime Incidents,crime_counts_by_tract,001902,001902,001902,0,NA,NA,NA,NA
+11001001902,001902,58,NA,NA,2020,001902,tract,NA,NA,001902,001902,001902,0,NA,NA,NA,NA
+11001002302,002302,70,11,59,2010,002302,tract,DC Open Data Crime Incidents,crime_counts_by_tract,002302,002302,002302,0,NA,NA,NA,NA
+11001002302,002302,53,NA,NA,2020,002302,tract,NA,NA,002302,002302,002302,0,NA,NA,NA,NA
+11001003301,003301,138,20,118,2010,003301,tract,DC Open Data Crime Incidents,crime_counts_by_tract,003301,003301,003301,0,NA,NA,NA,NA
+11001003301,003301,174,NA,NA,2020,003301,tract,NA,NA,003301,003301,003301,0,NA,NA,NA,NA
+11001000704,000704,35,NA,NA,2020,000704,tract,NA,NA,000704,000704,000704,0,NA,NA,NA,NA
+11001005501,005501,75,NA,NA,2020,005501,tract,NA,NA,005501,005501,005501,0,NA,NA,NA,NA
+11001005203,005203,139,NA,NA,2020,005203,tract,NA,NA,005203,005203,005203,1,Gospel,Thomas Circle NW,Route,Street
+11001005004,005004,106,NA,NA,2020,005004,tract,NA,NA,005004,005004,005004,8,An Orange Line Train to Ballston | Gospel | Marie,Horizon House | Claridge Towers | 11th Street NW | M Street NW | Northwest | Logan Circle,Setting | Route | Zone of Action,House | Apartment | Street | Quadrant
+11001009510,009510,116,NA,NA,2020,009510,tract,NA,NA,009510,009510,009510,0,NA,NA,NA,NA
+11001000102,000102,412,NA,NA,2020,000102,tract,NA,NA,000102,000102,000102,0,NA,NA,NA,NA
+11001005302,005302,72,NA,NA,2020,005302,tract,NA,NA,005302,005302,005302,0,NA,NA,NA,NA
+11001005503,005503,55,NA,NA,2020,005503,tract,NA,NA,005503,005503,005503,0,NA,NA,NA,NA
+11001000300,000300,166,13,153,2010,000300,tract,DC Open Data Crime Incidents,crime_counts_by_tract,000300,000300,000300,0,NA,NA,NA,NA
+11001000300,000300,78,NA,NA,2020,000300,tract,NA,NA,000300,000300,000300,0,NA,NA,NA,NA
+11001011100,011100,501,69,432,2010,011100,tract,DC Open Data Crime Incidents,crime_counts_by_tract,011100,011100,011100,3,The Girl Who Raised Pigeons | The Store | Gospel,Northeast,Zone of Action | Marker,Quadrant
+11001011100,011100,396,NA,NA,2020,011100,tract,NA,NA,011100,011100,011100,3,The Girl Who Raised Pigeons | The Store | Gospel,Northeast,Zone of Action | Marker,Quadrant
+11001007806,007806,205,61,144,2010,007806,tract,DC Open Data Crime Incidents,crime_counts_by_tract,007806,007806,007806,0,NA,NA,NA,NA
+11001007806,007806,143,NA,NA,2020,007806,tract,NA,NA,007806,007806,007806,0,NA,NA,NA,NA
+11001000501,000501,88,10,78,2010,000501,tract,DC Open Data Crime Incidents,crime_counts_by_tract,000501,000501,000501,1,A New Man,Sheraton Park Hotel,Setting,Hotel
+11001000501,000501,97,NA,NA,2020,000501,tract,NA,NA,000501,000501,000501,1,A New Man,Sheraton Park Hotel,Setting,Hotel
+11001009902,009902,102,16,86,2010,009902,tract,DC Open Data Crime Incidents,crime_counts_by_tract,009902,009902,009902,0,NA,NA,NA,NA
+11001009902,009902,117,NA,NA,2020,009902,tract,NA,NA,009902,009902,009902,0,NA,NA,NA,NA
+11001009906,009906,81,25,56,2010,009906,tract,DC Open Data Crime Incidents,crime_counts_by_tract,009906,009906,009906,0,NA,NA,NA,NA
+11001009906,009906,83,NA,NA,2020,009906,tract,NA,NA,009906,009906,009906,0,NA,NA,NA,NA
+11001000902,000902,50,1,49,2010,000902,tract,DC Open Data Crime Incidents,crime_counts_by_tract,000902,000902,000902,0,NA,NA,NA,NA
+11001000902,000902,51,NA,NA,2020,000902,tract,NA,NA,000902,000902,000902,0,NA,NA,NA,NA
+11001001100,001100,210,25,185,2010,001100,tract,DC Open Data Crime Incidents,crime_counts_by_tract,001100,001100,001100,0,NA,NA,NA,NA
+11001001100,001100,313,NA,NA,2020,001100,tract,NA,NA,001100,001100,001100,0,NA,NA,NA,NA
+11001001500,001500,73,2,71,2010,001500,tract,DC Open Data Crime Incidents,crime_counts_by_tract,001500,001500,001500,0,NA,NA,NA,NA
+11001001500,001500,81,NA,NA,2020,001500,tract,NA,NA,001500,001500,001500,0,NA,NA,NA,NA
+11001001600,001600,183,21,162,2010,001600,tract,DC Open Data Crime Incidents,crime_counts_by_tract,001600,001600,001600,0,NA,NA,NA,NA
+11001001600,001600,182,NA,NA,2020,001600,tract,NA,NA,001600,001600,001600,0,NA,NA,NA,NA
+11001001702,001702,156,16,140,2010,001702,tract,DC Open Data Crime Incidents,crime_counts_by_tract,001702,001702,001702,0,NA,NA,NA,NA
+11001001702,001702,181,NA,NA,2020,001702,tract,NA,NA,001702,001702,001702,0,NA,NA,NA,NA
+11001002001,002001,92,18,74,2010,002001,tract,DC Open Data Crime Incidents,crime_counts_by_tract,002001,002001,002001,0,NA,NA,NA,NA
+11001002001,002001,62,NA,NA,2020,002001,tract,NA,NA,002001,002001,002001,0,NA,NA,NA,NA
+11001002002,002002,211,73,138,2010,002002,tract,DC Open Data Crime Incidents,crime_counts_by_tract,002002,002002,002002,1,Young Lions,Manny?s Haven,Setting,Bar
+11001002002,002002,150,NA,NA,2020,002002,tract,NA,NA,002002,002002,002002,1,Young Lions,Manny?s Haven,Setting,Bar
+11001002301,002301,103,28,75,2010,002301,tract,DC Open Data Crime Incidents,crime_counts_by_tract,002301,002301,002301,0,NA,NA,NA,NA
+11001002301,002301,90,NA,NA,2020,002301,tract,NA,NA,002301,002301,002301,0,NA,NA,NA,NA
+11001002600,002600,116,12,104,2010,002600,tract,DC Open Data Crime Incidents,crime_counts_by_tract,002600,002600,002600,3,The Night Rhonda Ferguson Was Killed | Young Lions | An Orange Line Train to Ballston,Northwest | Regina Carstairs's Gold Coast House,Zone of Action | Setting,Quadrant | House
+11001002600,002600,87,NA,NA,2020,002600,tract,NA,NA,002600,002600,002600,3,The Night Rhonda Ferguson Was Killed | Young Lions | An Orange Line Train to Ballston,Northwest | Regina Carstairs's Gold Coast House,Zone of Action | Setting,Quadrant | House
+11001002900,002900,243,49,194,2010,002900,tract,DC Open Data Crime Incidents,crime_counts_by_tract,002900,002900,002900,0,NA,NA,NA,NA
+11001002900,002900,206,NA,NA,2020,002900,tract,NA,NA,002900,002900,002900,0,NA,NA,NA,NA
+11001003000,003000,448,61,387,2010,003000,tract,DC Open Data Crime Incidents,crime_counts_by_tract,003000,003000,003000,3,The Night Rhonda Ferguson Was Killed | A New Man,Cassandra's Sister's Apartment | Urban League | Harvard Street NW,Setting | Marker,Apartment | Organization | Street
+11001003000,003000,170,NA,NA,2020,003000,tract,NA,NA,003000,003000,003000,3,The Night Rhonda Ferguson Was Killed | A New Man,Cassandra's Sister's Apartment | Urban League | Harvard Street NW,Setting | Marker,Apartment | Organization | Street
+11001003600,003600,230,48,182,2010,003600,tract,DC Open Data Crime Incidents,crime_counts_by_tract,003600,003600,003600,15,The Night Rhonda Ferguson Was Killed | Young Lions | A Butterfly on F Street | Gospel,Cardozo High School | 13th Street NW | Clifton Street NW | 11th Street NW | Gladys?s House | 12th Street NW` | Rhonda?s House | Clifton Terrace | Mildred's House | Florida Avenue Grill | 14th Street and Fairmont Street,Setting | Route | Marker,School | Street | House | Apartment | Restaurant
+11001003600,003600,124,NA,NA,2020,003600,tract,NA,NA,003600,003600,003600,15,The Night Rhonda Ferguson Was Killed | Young Lions | A Butterfly on F Street | Gospel,Cardozo High School | 13th Street NW | Clifton Street NW | 11th Street NW | Gladys?s House | 12th Street NW` | Rhonda?s House | Clifton Terrace | Mildred's House | Florida Avenue Grill | 14th Street and Fairmont Street,Setting | Route | Marker,School | Street | House | Apartment | Restaurant
+11001004100,004100,123,4,119,2010,004100,tract,DC Open Data Crime Incidents,crime_counts_by_tract,004100,004100,004100,0,NA,NA,NA,NA
+11001004100,004100,56,NA,NA,2020,004100,tract,NA,NA,004100,004100,004100,0,NA,NA,NA,NA
+11001004202,004202,173,26,147,2010,004202,tract,DC Open Data Crime Incidents,crime_counts_by_tract,004202,004202,004202,0,NA,NA,NA,NA
+11001004202,004202,131,NA,NA,2020,004202,tract,NA,NA,004202,004202,004202,0,NA,NA,NA,NA
+11001005001,005001,151,16,135,2010,005001,tract,DC Open Data Crime Incidents,crime_counts_by_tract,005001,005001,005001,0,NA,NA,NA,NA
+11001005001,005001,133,NA,NA,2020,005001,tract,NA,NA,005001,005001,005001,0,NA,NA,NA,NA
+11001010700,010700,864,67,797,2010,010700,tract,DC Open Data Crime Incidents,crime_counts_by_tract,010700,010700,010700,9,The Night Rhonda Ferguson Was Killed | Young Lions | The Sunday Following Mother's Day | Marie,"Downtown | French Restaurant | K Street NW | Connecticut Avenue NW | Pennsylvania Avenue and 16th Street NW | 18th Street NW - Small Park | Washington, D.C. | Social Security Office | Washington",Zone of Action | Setting | Route | Marker | Projected Space,Neighborhood | Restaurant | Street | City | Government Office
+11001010700,010700,534,NA,NA,2020,010700,tract,NA,NA,010700,010700,010700,9,The Night Rhonda Ferguson Was Killed | Young Lions | The Sunday Following Mother's Day | Marie,"Downtown | French Restaurant | K Street NW | Connecticut Avenue NW | Pennsylvania Avenue and 16th Street NW | 18th Street NW - Small Park | Washington, D.C. | Social Security Office | Washington",Zone of Action | Setting | Route | Marker | Projected Space,Neighborhood | Restaurant | Street | City | Government Office
+11001006600,006600,79,5,74,2010,006600,tract,DC Open Data Crime Incidents,crime_counts_by_tract,006600,006600,006600,1,The Night Rhonda Ferguson Was Killed,"8th Street, SE",Route,Street
+11001006600,006600,84,NA,NA,2020,006600,tract,NA,NA,006600,006600,006600,1,The Night Rhonda Ferguson Was Killed,"8th Street, SE",Route,Street
+11001006804,006804,41,17,24,2010,006804,tract,DC Open Data Crime Incidents,crime_counts_by_tract,006804,006804,006804,6,The Girl Who Raised Pigeons | An Orange Line Train to Ballston | Gospel,Gallinger Hospital | Stadium-Armory Subway Platform | Orange Line Train | Southeast | D.C. General,Setting | Zone of Action | Marker,Hospital | Subway Station | Train | Quadrant
+11001006804,006804,38,NA,NA,2020,006804,tract,NA,NA,006804,006804,006804,6,The Girl Who Raised Pigeons | An Orange Line Train to Ballston | Gospel,Gallinger Hospital | Stadium-Armory Subway Platform | Orange Line Train | Southeast | D.C. General,Setting | Zone of Action | Marker,Hospital | Subway Station | Train | Quadrant
+11001004300,004300,243,34,209,2010,004300,tract,DC Open Data Crime Incidents,crime_counts_by_tract,004300,004300,004300,2,A New Man,Booker-T Theater | Police State,Setting,Theater | Police Station
+11001004300,004300,163,NA,NA,2020,004300,tract,NA,NA,004300,004300,004300,2,A New Man,Booker-T Theater | Police State,Setting,Theater | Police Station
+11001004702,004702,122,34,88,2010,004702,tract,DC Open Data Crime Incidents,crime_counts_by_tract,004702,004702,004702,7,The Girl Who Raised Pigeons | The First Day,Hahn's Shoe Store | Gonzaga High School | I Street NW | New Jersey Avenue NW | 3rd Street NW | Seaton Elementary School | Mt. Carmel Baptist,Marker | Route | Setting,Store | School | Street | Church
+11001004702,004702,207,NA,NA,2020,004702,tract,NA,NA,004702,004702,004702,7,The Girl Who Raised Pigeons | The First Day,Hahn's Shoe Store | Gonzaga High School | I Street NW | New Jersey Avenue NW | 3rd Street NW | Seaton Elementary School | Mt. Carmel Baptist,Marker | Route | Setting,Store | School | Street | Church
+11001007401,007401,234,74,160,2010,007401,tract,DC Open Data Crime Incidents,crime_counts_by_tract,007401,007401,007401,0,NA,NA,NA,NA
+11001007401,007401,74,NA,NA,2020,007401,tract,NA,NA,007401,007401,007401,0,NA,NA,NA,NA
+11001007407,007407,159,38,121,2010,007407,tract,DC Open Data Crime Incidents,crime_counts_by_tract,007407,007407,007407,0,NA,NA,NA,NA
+11001007407,007407,114,NA,NA,2020,007407,tract,NA,NA,007407,007407,007407,0,NA,NA,NA,NA
+11001007603,007603,216,48,168,2010,007603,tract,DC Open Data Crime Incidents,crime_counts_by_tract,007603,007603,007603,0,NA,NA,NA,NA
+11001007603,007603,203,NA,NA,2020,007603,tract,NA,NA,007603,007603,007603,0,NA,NA,NA,NA
+11001007708,007708,129,33,96,2010,007708,tract,DC Open Data Crime Incidents,crime_counts_by_tract,007708,007708,007708,0,NA,NA,NA,NA
+11001007708,007708,98,NA,NA,2020,007708,tract,NA,NA,007708,007708,007708,0,NA,NA,NA,NA
+11001007808,007808,190,67,123,2010,007808,tract,DC Open Data Crime Incidents,crime_counts_by_tract,007808,007808,007808,0,NA,NA,NA,NA
+11001007808,007808,181,NA,NA,2020,007808,tract,NA,NA,007808,007808,007808,0,NA,NA,NA,NA
+11001007809,007809,222,35,187,2010,007809,tract,DC Open Data Crime Incidents,crime_counts_by_tract,007809,007809,007809,0,NA,NA,NA,NA
+11001007809,007809,130,NA,NA,2020,007809,tract,NA,NA,007809,007809,007809,0,NA,NA,NA,NA
+11001008301,008301,107,14,93,2010,008301,tract,DC Open Data Crime Incidents,crime_counts_by_tract,008301,008301,008301,0,NA,NA,NA,NA
+11001008301,008301,130,NA,NA,2020,008301,tract,NA,NA,008301,008301,008301,0,NA,NA,NA,NA
+11001009601,009601,196,37,159,2010,009601,tract,DC Open Data Crime Incidents,crime_counts_by_tract,009601,009601,009601,0,NA,NA,NA,NA
+11001009601,009601,116,NA,NA,2020,009601,tract,NA,NA,009601,009601,009601,0,NA,NA,NA,NA
+11001009602,009602,160,40,120,2010,009602,tract,DC Open Data Crime Incidents,crime_counts_by_tract,009602,009602,009602,0,NA,NA,NA,NA
+11001009602,009602,191,NA,NA,2020,009602,tract,NA,NA,009602,009602,009602,0,NA,NA,NA,NA
+11001009804,009804,203,49,154,2010,009804,tract,DC Open Data Crime Incidents,crime_counts_by_tract,009804,009804,009804,0,NA,NA,NA,NA
+11001009804,009804,82,NA,NA,2020,009804,tract,NA,NA,009804,009804,009804,0,NA,NA,NA,NA
+11001009810,009810,228,57,171,2010,009810,tract,DC Open Data Crime Incidents,crime_counts_by_tract,009810,009810,009810,0,NA,NA,NA,NA
+11001009810,009810,68,NA,NA,2020,009810,tract,NA,NA,009810,009810,009810,0,NA,NA,NA,NA
+11001008903,008903,102,31,71,2010,008903,tract,DC Open Data Crime Incidents,crime_counts_by_tract,008903,008903,008903,0,NA,NA,NA,NA
+11001008903,008903,148,NA,NA,2020,008903,tract,NA,NA,008903,008903,008903,0,NA,NA,NA,NA
+11001004401,004401,282,NA,NA,2020,004401,tract,NA,NA,004401,004401,004401,2,A New Man,U Street & 10th Street NW | U Street NW,Setting,Street
+11001002703,002703,56,NA,NA,2020,002703,tract,NA,NA,002703,002703,002703,0,NA,NA,NA,NA
+11001003801,003801,56,NA,NA,2020,003801,tract,NA,NA,003801,003801,003801,0,NA,NA,NA,NA
+11001002704,002704,48,NA,NA,2020,002704,tract,NA,NA,002704,002704,002704,0,NA,NA,NA,NA
+11001005602,005602,41,NA,NA,2020,005602,tract,NA,NA,005602,005602,005602,0,NA,NA,NA,NA
+11001005202,005202,166,NA,NA,2020,005202,tract,NA,NA,005202,005202,005202,1,The Store,P Street NW,Route,Street
+11001010603,010603,145,NA,NA,2020,010603,tract,NA,NA,010603,010603,010603,10,The Girl Who Raised Pigeons | Marie,The Pigeon Coop | Jenny and Walter Creed?s House | Myrtle Street Apartment | Union Station | K Street NE | Myrtle Street NE | 1st Street NE | North Capitol Street NW,Setting | Marker | Route,Enclosure | House | Apartment | Subway Station | Street | Train Station
+11001011002,011002,5,0,5,2010,011002,tract,DC Open Data Crime Incidents,crime_counts_by_tract,011002,011002,011002,0,NA,NA,NA,NA
+11001011002,011002,10,NA,NA,2020,011002,tract,NA,NA,011002,011002,011002,0,NA,NA,NA,NA
+11001000804,000804,61,NA,NA,2020,000804,tract,NA,NA,000804,000804,000804,0,NA,NA,NA,NA
+11001003701,003701,100,NA,NA,2020,003701,tract,NA,NA,003701,003701,003701,1,Young Lions,Malcolm X Park,Marker,Park
+11001000703,000703,8,NA,NA,2020,000703,tract,NA,NA,000703,000703,000703,0,NA,NA,NA,NA
+11001000702,000702,60,3,57,2010,000702,tract,DC Open Data Crime Incidents,crime_counts_by_tract,000702,000702,000702,0,NA,NA,NA,NA
+11001000702,000702,27,NA,NA,2020,000702,tract,NA,NA,000702,000702,000702,0,NA,NA,NA,NA
+11001001402,001402,56,1,55,2010,001402,tract,DC Open Data Crime Incidents,crime_counts_by_tract,001402,001402,001402,0,NA,NA,NA,NA
+11001001402,001402,46,NA,NA,2020,001402,tract,NA,NA,001402,001402,001402,0,NA,NA,NA,NA
+11001002101,002101,240,71,169,2010,002101,tract,DC Open Data Crime Incidents,crime_counts_by_tract,002101,002101,002101,0,NA,NA,NA,NA
+11001002101,002101,132,NA,NA,2020,002101,tract,NA,NA,002101,002101,002101,0,NA,NA,NA,NA
+11001003500,003500,201,49,152,2010,003500,tract,DC Open Data Crime Incidents,crime_counts_by_tract,003500,003500,003500,0,NA,NA,NA,NA
+11001003500,003500,254,NA,NA,2020,003500,tract,NA,NA,003500,003500,003500,0,NA,NA,NA,NA
+11001007304,007304,264,114,150,2010,007304,tract,DC Open Data Crime Incidents,crime_counts_by_tract,007304,007304,007304,0,NA,NA,NA,NA
+11001007304,007304,172,NA,NA,2020,007304,tract,NA,NA,007304,007304,007304,0,NA,NA,NA,NA
+11001007601,007601,216,53,163,2010,007601,tract,DC Open Data Crime Incidents,crime_counts_by_tract,007601,007601,007601,3,Young Lions | An Orange Line Train to Ballston | Gospel,Southeast Club | Marvella's House | Southeast,Setting | Zone of Action,Nightclub | House | Quadrant
+11001007601,007601,296,NA,NA,2020,007601,tract,NA,NA,007601,007601,007601,3,Young Lions | An Orange Line Train to Ballston | Gospel,Southeast Club | Marvella's House | Southeast,Setting | Zone of Action,Nightclub | House | Quadrant
+11001008200,008200,66,1,65,2010,008200,tract,DC Open Data Crime Incidents,crime_counts_by_tract,008200,008200,008200,1,The Night Rhonda Ferguson Was Killed,East Capitol Street NE,Route,Street
+11001008200,008200,82,NA,NA,2020,008200,tract,NA,NA,008200,008200,008200,1,The Night Rhonda Ferguson Was Killed,East Capitol Street NE,Route,Street
+11001008702,008702,124,30,94,2010,008702,tract,DC Open Data Crime Incidents,crime_counts_by_tract,008702,008702,008702,0,NA,NA,NA,NA
+11001008702,008702,171,NA,NA,2020,008702,tract,NA,NA,008702,008702,008702,0,NA,NA,NA,NA
+11001009503,009503,90,15,75,2010,009503,tract,DC Open Data Crime Incidents,crime_counts_by_tract,009503,009503,009503,0,NA,NA,NA,NA
+11001009503,009503,69,NA,NA,2020,009503,tract,NA,NA,009503,009503,009503,0,NA,NA,NA,NA
+11001009508,009508,103,24,79,2010,009508,tract,DC Open Data Crime Incidents,crime_counts_by_tract,009508,009508,009508,0,NA,NA,NA,NA
+11001009508,009508,94,NA,NA,2020,009508,tract,NA,NA,009508,009508,009508,0,NA,NA,NA,NA
+11001009905,009905,149,41,108,2010,009905,tract,DC Open Data Crime Incidents,crime_counts_by_tract,009905,009905,009905,0,NA,NA,NA,NA
+11001009905,009905,120,NA,NA,2020,009905,tract,NA,NA,009905,009905,009905,0,NA,NA,NA,NA
+11001000202,000202,427,42,385,2010,000202,tract,DC Open Data Crime Incidents,crime_counts_by_tract,000202,000202,000202,2,The Girl Who Raised Pigeons | The Night Rhonda Ferguson Was Killed,Georgetown,Projected Space | Marker,Neighborhood
+11001000202,000202,298,NA,NA,2020,000202,tract,NA,NA,000202,000202,000202,2,The Girl Who Raised Pigeons | The Night Rhonda Ferguson Was Killed,Georgetown,Projected Space | Marker,Neighborhood
+11001010900,010900,282,44,238,2010,010900,tract,DC Open Data Crime Incidents,crime_counts_by_tract,010900,010900,010900,0,NA,NA,NA,NA
+11001010900,010900,104,NA,NA,2020,010900,tract,NA,NA,010900,010900,010900,0,NA,NA,NA,NA
+11001007409,007409,261,77,184,2010,007409,tract,DC Open Data Crime Incidents,crime_counts_by_tract,007409,007409,007409,0,NA,NA,NA,NA
+11001007409,007409,85,NA,NA,2020,007409,tract,NA,NA,007409,007409,007409,0,NA,NA,NA,NA
+11001007604,007604,181,32,149,2010,007604,tract,DC Open Data Crime Incidents,crime_counts_by_tract,007604,007604,007604,0,NA,NA,NA,NA
+11001007604,007604,166,NA,NA,2020,007604,tract,NA,NA,007604,007604,007604,0,NA,NA,NA,NA
+11001980000,980000,37,NA,NA,2020,980000,tract,NA,NA,980000,980000,980000,10,Young Lions | The Store | The Sunday Following Mother's Day,Lafayette Park | White House | Pennsylvania Avenue NW | Constitution Avenue NW | Department of Commerce | Southwest | Penelope's Apartment | Library of Congress,Setting | Marker | Route | Projected Space,Park | House | Street | Government Office | Apartment | Library
+11001000903,000903,25,NA,NA,2020,000903,tract,NA,NA,000903,000903,000903,0,NA,NA,NA,NA
+11001003802,003802,115,NA,NA,2020,003802,tract,NA,NA,003802,003802,003802,0,NA,NA,NA,NA
+11001007202,007202,74,NA,NA,2020,007202,tract,NA,NA,007202,007202,007202,0,NA,NA,NA,NA
+11001007203,007203,93,NA,NA,2020,007203,tract,NA,NA,007203,007203,007203,1,Gospel,Navy Yard,Marker,Shipyard
+11001001004,001004,151,NA,NA,2020,001004,tract,NA,NA,001004,001004,001004,0,NA,NA,NA,NA
+11001000600,000600,125,6,119,2010,000600,tract,DC Open Data Crime Incidents,crime_counts_by_tract,000600,000600,000600,0,NA,NA,NA,NA
+11001000600,000600,105,NA,NA,2020,000600,tract,NA,NA,000600,000600,000600,0,NA,NA,NA,NA
+11001004802,004802,119,41,78,2010,004802,tract,DC Open Data Crime Incidents,crime_counts_by_tract,004802,004802,004802,16,The Girl Who Raised Pigeons | The Store | The Sunday Following Mother's Day | Lost in the City,New York Avenue NW | 7th Street NW | Kentucky's Parents' House | 5th Street NW | N Street NW | M Street NW | 6th Street NW | Samuel Williams's Apartment | Friend's House | Old Apartment | Downstairs Apartment,Route | Setting | Projected Space | NA,Street | House | Apartment | NA
+11001004802,004802,112,NA,NA,2020,004802,tract,NA,NA,004802,004802,004802,16,The Girl Who Raised Pigeons | The Store | The Sunday Following Mother's Day | Lost in the City,New York Avenue NW | 7th Street NW | Kentucky's Parents' House | 5th Street NW | N Street NW | M Street NW | 6th Street NW | Samuel Williams's Apartment | Friend's House | Old Apartment | Downstairs Apartment,Route | Setting | Projected Space | NA,Street | House | Apartment | NA
+11001007404,007404,192,52,140,2010,007404,tract,DC Open Data Crime Incidents,crime_counts_by_tract,007404,007404,007404,0,NA,NA,NA,NA
+11001007404,007404,98,NA,NA,2020,007404,tract,NA,NA,007404,007404,007404,0,NA,NA,NA,NA
+11001008701,008701,143,33,110,2010,008701,tract,DC Open Data Crime Incidents,crime_counts_by_tract,008701,008701,008701,2,The Store,Mojo?s,Setting,Bar
+11001008701,008701,118,NA,NA,2020,008701,tract,NA,NA,008701,008701,008701,2,The Store,Mojo?s,Setting,Bar
+11001009603,009603,284,78,206,2010,009603,tract,DC Open Data Crime Incidents,crime_counts_by_tract,009603,009603,009603,0,NA,NA,NA,NA
+11001009603,009603,351,NA,NA,2020,009603,tract,NA,NA,009603,009603,009603,0,NA,NA,NA,NA
+11001009904,009904,88,26,62,2010,009904,tract,DC Open Data Crime Incidents,crime_counts_by_tract,009904,009904,009904,0,NA,NA,NA,NA
+11001009904,009904,133,NA,NA,2020,009904,tract,NA,NA,009904,009904,009904,0,NA,NA,NA,NA
+11001000802,000802,99,2,97,2010,000802,tract,DC Open Data Crime Incidents,crime_counts_by_tract,000802,000802,000802,0,NA,NA,NA,NA
+11001000802,000802,37,NA,NA,2020,000802,tract,NA,NA,000802,000802,000802,0,NA,NA,NA,NA
+11001002400,002400,165,42,123,2010,002400,tract,DC Open Data Crime Incidents,crime_counts_by_tract,002400,002400,002400,1,A New Man,Petworth,Zone of Action,Neighborhood
+11001002400,002400,170,NA,NA,2020,002400,tract,NA,NA,002400,002400,002400,1,A New Man,Petworth,Zone of Action,Neighborhood
+11001003400,003400,222,58,164,2010,003400,tract,DC Open Data Crime Incidents,crime_counts_by_tract,003400,003400,003400,4,Young Lions | Lost in the City | Gospel | Marie,Howard Hospital | Frazier?s Funeral Home | Howard University Hospital | Howard University,Setting | Marker,Hospital | Business | University
+11001003400,003400,175,NA,NA,2020,003400,tract,NA,NA,003400,003400,003400,4,Young Lions | Lost in the City | Gospel | Marie,Howard Hospital | Frazier?s Funeral Home | Howard University Hospital | Howard University,Setting | Marker,Hospital | Business | University
+11001010400,010400,315,94,221,2010,010400,tract,DC Open Data Crime Incidents,crime_counts_by_tract,010400,010400,010400,1,The Night Rhonda Ferguson Was Killed,St. Elizabeths Hospital,Marker,Hospital
+11001010400,010400,185,NA,NA,2020,010400,tract,NA,NA,010400,010400,010400,1,The Night Rhonda Ferguson Was Killed,St. Elizabeths Hospital,Marker,Hospital
+11001009000,009000,55,6,49,2010,009000,tract,DC Open Data Crime Incidents,crime_counts_by_tract,009000,009000,009000,0,NA,NA,NA,NA
+11001009000,009000,203,NA,NA,2020,009000,tract,NA,NA,009000,009000,009000,0,NA,NA,NA,NA
+11001001304,001304,115,NA,NA,2020,001304,tract,NA,NA,001304,001304,001304,0,NA,NA,NA,NA
+11001007201,007201,102,NA,NA,2020,007201,tract,NA,NA,007201,007201,007201,0,NA,NA,NA,NA
+11001002503,002503,223,NA,NA,2020,002503,tract,NA,NA,002503,002503,002503,0,NA,NA,NA,NA
+11001007804,007804,229,63,166,2010,007804,tract,DC Open Data Crime Incidents,crime_counts_by_tract,007804,007804,007804,0,NA,NA,NA,NA
+11001007804,007804,200,NA,NA,2020,007804,tract,NA,NA,007804,007804,007804,0,NA,NA,NA,NA
+11001001803,001803,90,30,60,2010,001803,tract,DC Open Data Crime Incidents,crime_counts_by_tract,001803,001803,001803,0,NA,NA,NA,NA
+11001001803,001803,43,NA,NA,2020,001803,tract,NA,NA,001803,001803,001803,0,NA,NA,NA,NA
+11001007408,007408,142,44,98,2010,007408,tract,DC Open Data Crime Incidents,crime_counts_by_tract,007408,007408,007408,0,NA,NA,NA,NA
+11001007408,007408,92,NA,NA,2020,007408,tract,NA,NA,007408,007408,007408,0,NA,NA,NA,NA
+11001009204,009204,121,37,84,2010,009204,tract,DC Open Data Crime Incidents,crime_counts_by_tract,009204,009204,009204,0,NA,NA,NA,NA
+11001009204,009204,101,NA,NA,2020,009204,tract,NA,NA,009204,009204,009204,0,NA,NA,NA,NA
+11001004902,004902,160,37,123,2010,004902,tract,DC Open Data Crime Incidents,crime_counts_by_tract,004902,004902,004902,3,His Mother's House,Joyce Moses's House | O Street NW,Setting,House | Street
+11001004902,004902,205,NA,NA,2020,004902,tract,NA,NA,004902,004902,004902,3,His Mother's House,Joyce Moses's House | O Street NW,Setting,House | Street
+11001007605,007605,89,17,72,2010,007605,tract,DC Open Data Crime Incidents,crime_counts_by_tract,007605,007605,007605,0,NA,NA,NA,NA
+11001007605,007605,166,NA,NA,2020,007605,tract,NA,NA,007605,007605,007605,0,NA,NA,NA,NA
+11001009102,009102,333,59,274,2010,009102,tract,DC Open Data Crime Incidents,crime_counts_by_tract,009102,009102,009102,0,NA,NA,NA,NA
+11001009102,009102,524,NA,NA,2020,009102,tract,NA,NA,009102,009102,009102,0,NA,NA,NA,NA
+11001009201,009201,57,14,43,2010,009201,tract,DC Open Data Crime Incidents,crime_counts_by_tract,009201,009201,009201,0,NA,NA,NA,NA
+11001009201,009201,114,NA,NA,2020,009201,tract,NA,NA,009201,009201,009201,0,NA,NA,NA,NA
+11001009511,009511,14,NA,NA,2020,009511,tract,NA,NA,009511,009511,009511,0,NA,NA,NA,NA
+11001004402,004402,424,NA,NA,2020,004402,tract,NA,NA,004402,004402,004402,3,The Night Rhonda Ferguson Was Killed | A New Man,Elson?s | 11th Street NW | NAACP,Setting | Route | Marker,Gas Station | Street | Organization
+11001001301,001301,24,0,24,2010,001301,tract,DC Open Data Crime Incidents,crime_counts_by_tract,001301,001301,001301,0,NA,NA,NA,NA
+11001001301,001301,61,NA,NA,2020,001301,tract,NA,NA,001301,001301,001301,0,NA,NA,NA,NA
+11001003200,003200,247,45,202,2010,003200,tract,DC Open Data Crime Incidents,crime_counts_by_tract,003200,003200,003200,0,NA,NA,NA,NA
+11001003200,003200,184,NA,NA,2020,003200,tract,NA,NA,003200,003200,003200,0,NA,NA,NA,NA
+11001007100,007100,278,58,220,2010,007100,tract,DC Open Data Crime Incidents,crime_counts_by_tract,007100,007100,007100,0,NA,NA,NA,NA
+11001007100,007100,189,NA,NA,2020,007100,tract,NA,NA,007100,007100,007100,0,NA,NA,NA,NA
+11001007703,007703,276,82,194,2010,007703,tract,DC Open Data Crime Incidents,crime_counts_by_tract,007703,007703,007703,0,NA,NA,NA,NA
+11001007703,007703,173,NA,NA,2020,007703,tract,NA,NA,007703,007703,007703,0,NA,NA,NA,NA
+11001000100,000100,316,31,285,2010,000100,tract,DC Open Data Crime Incidents,crime_counts_by_tract,000100,000100,000100,0,NA,NA,NA,NA
+11001000701,000701,75,3,72,2010,000701,tract,DC Open Data Crime Incidents,crime_counts_by_tract,000701,000701,000701,0,NA,NA,NA,NA
+11001000801,000801,109,2,107,2010,000801,tract,DC Open Data Crime Incidents,crime_counts_by_tract,000801,000801,000801,0,NA,NA,NA,NA
+11001000901,000901,104,2,102,2010,000901,tract,DC Open Data Crime Incidents,crime_counts_by_tract,000901,000901,000901,0,NA,NA,NA,NA
+11001001001,001001,370,24,346,2010,001001,tract,DC Open Data Crime Incidents,crime_counts_by_tract,001001,001001,001001,0,NA,NA,NA,NA
+11001001302,001302,81,7,74,2010,001302,tract,DC Open Data Crime Incidents,crime_counts_by_tract,001302,001302,001302,0,NA,NA,NA,NA
+11001002502,002502,328,84,244,2010,002502,tract,DC Open Data Crime Incidents,crime_counts_by_tract,002502,002502,002502,0,NA,NA,NA,NA
+11001002701,002701,143,18,125,2010,002701,tract,DC Open Data Crime Incidents,crime_counts_by_tract,002701,002701,002701,0,NA,NA,NA,NA
+11001003700,003700,192,34,158,2010,003700,tract,DC Open Data Crime Incidents,crime_counts_by_tract,003700,003700,003700,0,NA,NA,NA,NA
+11001003800,003800,260,49,211,2010,003800,tract,DC Open Data Crime Incidents,crime_counts_by_tract,003800,003800,003800,0,NA,NA,NA,NA
+11001003900,003900,163,36,127,2010,003900,tract,DC Open Data Crime Incidents,crime_counts_by_tract,003900,003900,003900,0,NA,NA,NA,NA
+11001004400,004400,605,116,489,2010,004400,tract,DC Open Data Crime Incidents,crime_counts_by_tract,004400,004400,004400,0,NA,NA,NA,NA
+11001004701,004701,133,40,93,2010,004701,tract,DC Open Data Crime Incidents,crime_counts_by_tract,004701,004701,004701,0,NA,NA,NA,NA
+11001005002,005002,165,39,126,2010,005002,tract,DC Open Data Crime Incidents,crime_counts_by_tract,005002,005002,005002,0,NA,NA,NA,NA
+11001005201,005201,370,49,321,2010,005201,tract,DC Open Data Crime Incidents,crime_counts_by_tract,005201,005201,005201,0,NA,NA,NA,NA
+11001005301,005301,201,26,175,2010,005301,tract,DC Open Data Crime Incidents,crime_counts_by_tract,005301,005301,005301,0,NA,NA,NA,NA
+11001005500,005500,472,60,412,2010,005500,tract,DC Open Data Crime Incidents,crime_counts_by_tract,005500,005500,005500,0,NA,NA,NA,NA
+11001005600,005600,141,22,119,2010,005600,tract,DC Open Data Crime Incidents,crime_counts_by_tract,005600,005600,005600,0,NA,NA,NA,NA
+11001005800,005800,908,113,795,2010,005800,tract,DC Open Data Crime Incidents,crime_counts_by_tract,005800,005800,005800,0,NA,NA,NA,NA
+11001006202,006202,192,21,171,2010,006202,tract,DC Open Data Crime Incidents,crime_counts_by_tract,006202,006202,006202,0,NA,NA,NA,NA
+11001007200,007200,130,17,113,2010,007200,tract,DC Open Data Crime Incidents,crime_counts_by_tract,007200,007200,007200,0,NA,NA,NA,NA
+11001009501,009501,141,27,114,2010,009501,tract,DC Open Data Crime Incidents,crime_counts_by_tract,009501,009501,009501,0,NA,NA,NA,NA
+11001010200,010200,172,20,152,2010,010200,tract,DC Open Data Crime Incidents,crime_counts_by_tract,010200,010200,010200,0,NA,NA,NA,NA
+11001010600,010600,453,94,359,2010,010600,tract,DC Open Data Crime Incidents,crime_counts_by_tract,010600,010600,010600,0,NA,NA,NA,NA
+11001011000,011000,80,15,65,2010,011000,tract,DC Open Data Crime Incidents,crime_counts_by_tract,011000,011000,011000,0,NA,NA,NA,NA

@@ -1,0 +1,2088 @@
+---
+title: "BlackDataLabEdwardJonesProj"
+author: "Bayowa"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+
+## D.C Black Population Count
+
+library(tidyverse)
+library(janitor)
+
+# Read NHGIS File
+blackpop_raw <- read_csv("Data_raw/nhgis0003_ts_nominal_tract.csv") %>%
+  clean_names()
+
+# Filter to DC
+blackpop_dc <- blackpop_raw %>%
+  filter(state == "District of Columbia")
+
+# Select Black population variables 
+pop_dc_black <- blackpop_dc %>%
+  select(
+    nhgiscode,
+    tracta,
+    name1970, name1980, name1990, name2000, name2010, name2020,
+    b18ab1970,
+    b18ab1980,
+    b18ab1990,
+    b18ab2000,
+    b18ab2010,
+    b18ab2020
+  )
+
+# Convert to long format
+dc_black_long <- pop_dc_black %>%
+  pivot_longer(
+    cols = starts_with("b18ab"),
+    names_to = "year",
+    values_to = "black_population"
+  ) %>%
+  mutate(
+    year = str_extract(year, "\\d{4}") %>% as.integer()
+  )
+
+# Attach correct tract name by decade
+dc_black_long <- dc_black_long %>%
+  mutate(
+    tract_name = case_when(
+      year == 1970 ~ name1970,
+      year == 1980 ~ name1980,
+      year == 1990 ~ name1990,
+      year == 2000 ~ name2000,
+      year == 2010 ~ name2010,
+      year == 2020 ~ name2020
+    )
+  )
+
+#Cleaned dataset
+dc_black_population_clean <- dc_black_long %>%
+  filter(!is.na(black_population)) %>%
+  select(
+    nhgiscode,
+    tracta,
+    tract_name,
+    year,
+    black_population
+  ) %>%
+  arrange(year, tracta)
+
+
+#write_csv(
+  #dc_black_population_clean,
+  "Cleaned_data_EDJones/dc_black_population_tract_1970_2020.csv"
+#)
+
+View(dc_black_population_clean)
+
+```
+
+### Black Population %
+```{r}
+### 1960 Black (Non-White) Population
+library(tidyverse)
+library(janitor)
+
+race_1960_raw <- read_csv("Data_raw/nhgis0002_ds92_1960_tract.csv") %>%
+  clean_names()
+
+# Filter to DC and select relevant columns
+race_1960_dc <- race_1960_raw %>%
+  filter(statea == "11") %>%            # FIPS code 11 = DC
+  select(
+    nhgiscode = gisjoin,
+    tracta,
+    areaname,
+    total_population = b9t001,          # Total
+    nonwhite_population = b7b003        # Non-White (Black proxy for 1960 DC)
+  ) %>%
+  mutate(
+    year = 1960L,
+    # Standardize TRACTA to match existing format
+    tracta = str_pad(as.character(as.integer(tracta)), width = 4, pad = "0"),
+    black_population = nonwhite_population,
+    black_percent = black_population / total_population,
+    tract_name = areaname
+  ) %>%
+  select(nhgiscode, tracta, tract_name, year, black_population,
+         total_population, black_percent)
+
+
+```
+
+
+
+```{r}
+library(tidyverse)
+library(janitor)
+
+race_raw <- read_csv("Data_raw/nhgis0003_ts_nominal_tract.csv") %>%
+  clean_names()
+
+race_dc <- race_raw %>%
+  filter(state == "District of Columbia")
+
+race_dc_selected <- race_dc %>%
+  select(
+    nhgiscode,
+    tracta,
+    name1970, name1980, name1990, name2000, name2010, name2020,
+
+    # White
+    b18aa1970, b18aa1980, b18aa1990, b18aa2000, b18aa2010, b18aa2020,
+
+    # Black
+    b18ab1970, b18ab1980, b18ab1990, b18ab2000, b18ab2010, b18ab2020,
+
+    # AI/AN
+    b18ac1970, b18ac1980, b18ac1990, b18ac2000, b18ac2010, b18ac2020,
+
+    # Asian / Pacific Islander / Other
+    b18ad1970, b18ad1980, b18ad1990, b18ad2000, b18ad2010, b18ad2020,
+
+    # Two or more races (2000+)
+    b18ae2000, b18ae2010, b18ae2020
+  )
+
+```
+
+
+```{r}
+race_long <- race_dc_selected %>%
+  pivot_longer(
+    cols = starts_with("b18"),
+    names_to = "variable",
+    values_to = "population"
+  ) %>%
+  mutate(
+    year = str_extract(variable, "\\d{4}") %>% as.integer(),
+    race = case_when(
+      str_detect(variable, "b18aa") ~ "White",
+      str_detect(variable, "b18ab") ~ "Black",
+      str_detect(variable, "b18ac") ~ "American Indian or Alaska Native",
+      str_detect(variable, "b18ad") ~ "Asian / Pacific Islander / Other",
+      str_detect(variable, "b18ae") ~ "Two or More Races"
+    )
+  )
+#Total population
+dc_total_population_clean <- race_long %>%
+  group_by(nhgiscode, tracta, year) %>%
+  summarise(
+    total_population = sum(population, na.rm = TRUE),
+    .groups = "drop"
+  )
+#Black population
+dc_black_population_clean <- race_long %>%
+  filter(race == "Black") %>%
+  mutate(
+    tract_name = case_when(
+      year == 1970 ~ name1970,
+      year == 1980 ~ name1980,
+      year == 1990 ~ name1990,
+      year == 2000 ~ name2000,
+      year == 2010 ~ name2010,
+      year == 2020 ~ name2020
+    )
+  ) %>%
+  select(
+    nhgiscode,
+    tracta,
+    tract_name,
+    year,
+    black_population = population
+  ) %>%
+  filter(!is.na(black_population))
+```
+
+```{r}
+dc_black_percent <- dc_black_population_clean %>%
+  left_join(
+    dc_total_population_clean,
+    by = c("nhgiscode", "tracta", "year")
+  ) %>%
+  mutate(
+    black_percent = black_population / total_population
+  )
+#write_csv(
+  #dc_black_percent,
+  #"Cleaned_data_EDJones/dc_black_population_percentage_1970_2020.csv"
+#)
+View(dc_black_percent)
+```
+
+```{r}
+# Now bind 
+dc_black_percent_full <- bind_rows(
+  race_1960_dc,
+  dc_black_percent        
+) %>%
+  arrange(nhgiscode, year)
+View(dc_black_percent_full)
+#write_csv(
+  #dc_black_percent_full,
+  #"Cleaned_data_EDJones/dc_black_population_percentage_1960_2020.csv"
+#)
+```
+
+
+
+### Black Population Change
+```{r}
+dc_black_change <- dc_black_percent_full %>%
+  arrange(nhgiscode, year) %>%
+  group_by(nhgiscode) %>%
+  mutate(
+    black_pop_change = black_population - lag(black_population),
+    black_pop_pct_change = (black_pop_change / lag(black_population)) * 100
+  ) %>%
+  ungroup()
+
+#write_csv(
+  #dc_black_change,
+  #"Cleaned_data_EDJones/dc_black_population_change_1960_2020.csv"
+#)
+View(dc_black_change)
+```
+
+### Segregation
+```{r}
+dc_black_segregation <- dc_black_percent_full %>%
+  mutate(
+    segregation_category = case_when(
+      black_percent < 0.25 ~ "0–25%",
+      black_percent < 0.50 ~ "25–50%",
+      black_percent < 0.75 ~ "50–75%",
+      TRUE ~ "75–100%"
+    )
+  )
+#write_csv(
+  #dc_black_segregation,
+  #"Cleaned_data_EDJones/dc_black_segregation_categories.csv"
+#)
+View(dc_black_segregation)
+```
+
+### Demographics (age,sex)
+```{r}
+library(tidyverse)
+library(janitor)
+library(jsonlite)
+
+output_dir <- "Cleaned_data_EDJones"
+if(!dir.exists(output_dir)) dir.create(output_dir, recursive = TRUE)
+
+#Process 1960 Total Population (B8D) 
+age_sex_1960_raw <- read_csv("Data_raw/nhgis0015_ds92_Age_sex_1960_tract.csv") %>%
+  clean_names()
+
+dc_age_sex_1960_clean <- age_sex_1960_raw %>%
+  filter(statea == "11") %>%
+  select(gisjoin, tracta, areaname, b8d001:b8d050) %>%
+  pivot_longer(cols = b8d001:b8d050, names_to = "variable", values_to = "count") %>%
+  mutate(
+    # Refined sex logic: extract digits and check if odd (male) or even (female)
+    var_num = as.numeric(str_extract(variable, "\\d+")),
+    sex = if_else(var_num %% 2 == 1, "male", "female"),
+    age_detailed = case_when(
+      var_num %in% 1:2 ~ "Under 1 year",
+      var_num %in% 3:4 ~ "1 year",
+      var_num %in% 5:6 ~ "2 years",
+      var_num %in% 7:8 ~ "3 years",
+      var_num %in% 9:10 ~ "4 years",
+      var_num %in% 11:12 ~ "5 years",
+      var_num %in% 13:14 ~ "6 years",
+      var_num %in% 15:16 ~ "7 years",
+      var_num %in% 17:18 ~ "8 years",
+      var_num %in% 19:20 ~ "9 years",
+      var_num %in% 21:22 ~ "10 years",
+      var_num %in% 23:24 ~ "11 years",
+      var_num %in% 25:26 ~ "12 years",
+      var_num %in% 27:28 ~ "13 years",
+      var_num %in% 29:30 ~ "14 years",
+      var_num %in% 31:32 ~ "15 years",
+      var_num %in% 33:34 ~ "16 years",
+      var_num %in% 35:36 ~ "17 years",
+      var_num %in% 37:38 ~ "18 years",
+      var_num %in% 39:40 ~ "19 years",
+      var_num %in% 41:42 ~ "20 years",
+      var_num %in% 43:44 ~ "21-24 years",
+      var_num %in% 45:46 ~ "75-79 years",
+      var_num %in% 47:48 ~ "80-84 years",
+      var_num %in% 49:50 ~ "85 years and over",
+      TRUE ~ NA_character_
+    ),
+    age_group = case_when(
+      age_detailed %in% c("Under 1 year", "1 year", "2 years", "3 years", "4 years") ~ "Under 5 years",
+      age_detailed %in% c("5 years", "6 years", "7 years", "8 years", "9 years") ~ "5 to 9 years",
+      age_detailed %in% c("10 years", "11 years", "12 years", "13 years", "14 years") ~ "10 to 14 years",
+      age_detailed %in% c("15 years", "16 years", "17 years") ~ "15 to 17 years",
+      age_detailed %in% c("18 years", "19 years") ~ "18 and 19 years",
+      age_detailed == "20 years" ~ "20 years",
+      age_detailed == "21-24 years" ~ "22 to 24 years",
+      age_detailed %in% c("75-79 years", "80-84 years") ~ "75 to 84 years",
+      age_detailed == "85 years and over" ~ "85 years and over",
+      TRUE ~ NA_character_
+    ),
+    year = 1960L,
+    population = "total",
+    source = "1960 Census - NT18/B8D"
+  ) %>%
+  filter(!is.na(age_group), count >= 0) %>%
+  group_by(gisjoin, tracta, areaname, year, population, sex, age_group, source) %>%
+  summarise(count = sum(count, na.rm = TRUE), .groups = "drop") %>%
+  # Standardize column names for binding later
+  rename(geographic_id = gisjoin, tract_id = tracta, location_name = areaname) %>%
+  mutate(tract_id = as.character(tract_id))
+
+# Process 1970-2020 Total Population (B58)
+b58_raw <- read_csv("Data_raw/nhgis0014_ts_nominal_Age_sex_1970_2020_tract.csv") %>%
+  clean_names()
+
+dc_b58 <- b58_raw %>%
+  filter(statefp %in% c(11, "11") | state == "District of Columbia")
+
+# Extract metadata for names
+b58_tract_names <- dc_b58 %>%
+  select(nhgiscode, tracta, starts_with("name")) %>%
+  distinct()
+
+dc_b58_long <- dc_b58 %>%
+  select(nhgiscode, tracta, b58aa1970:b58bj2020) %>%
+  pivot_longer(cols = b58aa1970:b58bj2020, names_to = "variable", values_to = "count") %>%
+  mutate(
+    sex = if_else(str_detect(variable, "b58a[a-r]"), "male", "female"),
+    age_code = str_extract(variable, "(?<=b58)[a-z]{2}"),
+    year = as.integer(str_extract(variable, "\\d{4}")),
+    age_group = case_when(
+      age_code %in% c("aa", "as") ~ "Under 5 years",
+      age_code %in% c("ab", "at") ~ "5 to 9 years",
+      age_code %in% c("ac", "au") ~ "10 to 14 years",
+      age_code %in% c("ad", "av") ~ "15 to 17 years",
+      age_code %in% c("ae", "aw") ~ "18 and 19 years",
+      age_code %in% c("af", "ax") ~ "20 years",
+      age_code %in% c("ag", "ay") ~ "21 years",
+      age_code %in% c("ah", "az") ~ "22 to 24 years",
+      age_code %in% c("ai", "ba") ~ "25 to 29 years",
+      age_code %in% c("aj", "bb") ~ "30 to 34 years",
+      age_code %in% c("ak", "bc") ~ "35 to 44 years",
+      age_code %in% c("al", "bd") ~ "45 to 54 years",
+      age_code %in% c("am", "be") ~ "55 to 59 years",
+      age_code %in% c("an", "bf") ~ "60 and 61 years",
+      age_code %in% c("ao", "bg") ~ "62 to 64 years",
+      age_code %in% c("ap", "bh") ~ "65 to 74 years",
+      age_code %in% c("aq", "bi") ~ "75 to 84 years",
+      age_code %in% c("ar", "bj") ~ "85 years and over",
+      TRUE ~ NA_character_
+    )
+  ) %>%
+  left_join(b58_tract_names, by = c("nhgiscode", "tracta")) %>%
+  mutate(
+    location_name = case_when(
+      year == 1970 ~ name1970,
+      year == 1980 ~ name1980,
+      year == 1990 ~ name1990,
+      year == 2000 ~ name2000,
+      year == 2010 ~ name2010,
+      year == 2020 ~ name2020,
+      TRUE ~ paste("Tract", tracta)
+    ),
+    population = "total",
+    source = "NHGIS Time Series B58"
+  ) %>%
+  select(geographic_id = nhgiscode, tract_id = tracta, location_name, year, population, sex, age_group, count, source) %>%
+  mutate(tract_id = as.character(tract_id))
+
+# Combine and Finalize 
+dc_age_sex_total_all <- bind_rows(dc_age_sex_1960_clean, dc_b58_long) %>%
+  mutate(
+    decade = paste0(floor(year / 10) * 10, "s"),
+    data_quality = if_else(year == 1960, "limited - missing ages 25-64", "complete - B58 standardized")
+  ) %>%
+  arrange(year, tract_id, sex, age_group)
+
+# Export & Summarize
+write_csv(dc_age_sex_total_all, file.path(output_dir, "dc_age_sex_total_1960_2020.csv"))
+
+total_sex_summary <- dc_age_sex_total_all %>%
+  group_by(year, sex) %>%
+  summarise(total_pop = sum(count, na.rm = TRUE), .groups = "drop") %>%
+  pivot_wider(names_from = sex, values_from = total_pop)
+
+print(total_sex_summary)
+View(dc_age_sex_total_all)
+
+```
+
+
+
+
+### Income- Household income(NHGIS)
+```{r}
+library(tidyverse)
+library(janitor)
+
+
+# Create output directory
+output_dir <- "Cleaned_data_EDJones"
+if(!dir.exists(output_dir)) dir.create(output_dir, recursive = TRUE)
+
+cat("Starting DC Income Data Processing (1960-2020)...\n")
+cat("Output directory:", output_dir, "\n")
+
+
+#PROCESS 1960 FAMILY INCOME DATA (Census)
+
+cat("\nProcessing 1960 family income data...\n")
+
+income_1960_raw <- read_csv("Data_raw/nhgis0008_ds92_1960HouseholdIncome_tract.csv") %>%
+  clean_names()
+
+# Filter for DC (STATEA = 11 for DC)
+dc_income_1960 <- income_1960_raw %>%
+  filter(statea == "11")
+
+# Clean and prepare 1960 FAMILY income data
+dc_income_1960_clean <- dc_income_1960 %>%
+  select(
+    gisjoin,
+    year,
+    tracta,
+    areaname,
+    # FAMILY income columns for 1959 (B8W table)
+    b8w001:b8w013
+  ) %>%
+  # Convert to long format
+  pivot_longer(
+    cols = b8w001:b8w013,
+    names_to = "variable_code",
+    values_to = "families"
+  ) %>%
+  mutate(
+    # Create meaningful income categories
+    income_category = case_when(
+      variable_code == "b8w001" ~ "<$1,000",
+      variable_code == "b8w002" ~ "$1,000–1,999",
+      variable_code == "b8w003" ~ "$2,000–2,999",
+      variable_code == "b8w004" ~ "$3,000–3,999",
+      variable_code == "b8w005" ~ "$4,000–4,999",
+      variable_code == "b8w006" ~ "$5,000–5,999",
+      variable_code == "b8w007" ~ "$6,000–6,999",
+      variable_code == "b8w008" ~ "$7,000–7,999",
+      variable_code == "b8w009" ~ "$8,000–8,999",
+      variable_code == "b8w010" ~ "$9,000–9,999",
+      variable_code == "b8w011" ~ "$10,000–14,999",
+      variable_code == "b8w012" ~ "$15,000–24,999",
+      variable_code == "b8w013" ~ "$25,000+"
+    ),
+    # Remove original variable code
+    variable_code = NULL
+  ) %>%
+  # Add metadata
+  mutate(
+    unit = "families",  # Important: this is FAMILY income
+    income_year = 1959,  # Income reported is for 1959
+    data_type = "family_income",
+    source = "1960 Census - Families by Income in 1959 (B8W table)",
+    note = "1960 data reports FAMILY income, not household income. Filename is mislabeled."
+  ) %>%
+  rename(count = families)  # Standardize column name
+
+cat("✅ 1960 data processed:", nrow(dc_income_1960_clean), "observations\n")
+
+
+#PROCESS 1970-2000 HOUSEHOLD INCOME DATA (NHGIS Time Series)
+
+
+cat("\nProcessing 1970-2000 household income data...\n")
+
+income_raw <- read_csv(
+  "Data_raw/nhgis0005_ts_houseincome_nominal_tract.csv",
+  show_col_types = FALSE
+) %>%
+  clean_names()
+
+income_dc <- income_raw %>%
+  filter(state == "District of Columbia")
+
+# Process 1970-2000 household income
+dc_income_1970_2000 <- income_dc %>%
+  select(
+    nhgiscode,
+    tracta,
+    name1970, name1980, name1990, name2000,
+    # Household income categories (4 brackets)
+    bs7aa1970, bs7aa1980, bs7aa1990, bs7aa2000, # <$10k
+    bs7ab1970, bs7ab1980, bs7ab1990, bs7ab2000, # $10k–14,999
+    bs7ac1970, bs7ac1980, bs7ac1990, bs7ac2000, # $15k–24,999
+    bs7ad1970, bs7ad1980, bs7ad1990, bs7ad2000  # $25k+
+  ) %>%
+  pivot_longer(
+    cols = starts_with("bs7"),
+    names_to = "variable",
+    values_to = "households"
+  ) %>%
+  mutate(
+    year = str_extract(variable, "\\d{4}") %>% as.integer(),
+    income_category = case_when(
+      str_detect(variable, "bs7aa") ~ "<$10,000",
+      str_detect(variable, "bs7ab") ~ "$10,000–14,999",
+      str_detect(variable, "bs7ac") ~ "$15,000–24,999",
+      str_detect(variable, "bs7ad") ~ "$25,000+"
+    ),
+    tract_name = case_when(
+      year == 1970 ~ name1970,
+      year == 1980 ~ name1980,
+      year == 1990 ~ name1990,
+      year == 2000 ~ name2000
+    )
+  ) %>%
+  filter(!is.na(households)) %>%
+  select(
+    nhgiscode,
+    tracta,
+    tract_name,
+    year,
+    income_category,
+    households
+  ) %>%
+  # Add metadata
+  mutate(
+    unit = "households",
+    income_year = year,
+    data_type = "household_income",
+    source = "NHGIS Time Series - Household Income (BS7 table)",
+    note = "Nominal household income data. 4 income brackets."
+  ) %>%
+  rename(count = households)  # Standardize column name
+
+cat("✅ 1970-2000 data processed:", nrow(dc_income_1970_2000), "observations\n")
+cat("   Years:", paste(sort(unique(dc_income_1970_2000$year)), collapse = ", "), "\n")
+
+
+
+# Read 2010 ACS data
+acs_2010_raw <- read_csv("Data_raw/nhgis0009_ds191Household_MedianHouseincome_2008_20125_tract.csv") %>%
+  clean_names()
+
+# Filter for DC
+dc_acs_2010 <- acs_2010_raw %>%
+  filter(statea == "11")
+
+# Process 2010 income distribution (QU0 = B19001 household income table)
+dc_income_2010 <- dc_acs_2010 %>%
+  select(
+    gisjoin,
+    tracta,
+    name_e,
+    # 16 income brackets from ACS table B19001
+    qu0e002:qu0e017
+  ) %>%
+  pivot_longer(
+    cols = qu0e002:qu0e017,
+    names_to = "variable",
+    values_to = "count"
+  ) %>%
+  mutate(
+    # Map 16 ACS brackets to 4 categories for consistency
+    income_category = case_when(
+      variable == "qu0e002" ~ "<$10,000",
+      variable == "qu0e003" ~ "$10,000–14,999",
+      variable %in% c("qu0e004", "qu0e005") ~ "$15,000–24,999",
+      TRUE ~ "$25,000+"  # Combine all higher brackets
+    ),
+    year = 2010,
+    tract_name = name_e,
+    unit = "households",
+    income_year = 2012,  # ACS reports in 2012 inflation-adjusted dollars
+    data_type = "household_income",
+    source = "ACS 2008-2012 - Household Income (B19001 table)",
+    note = "2012 inflation-adjusted dollars. 16 ACS brackets mapped to 4."
+  ) %>%
+  # Sum counts for each category (since we combined brackets)
+  group_by(gisjoin, tracta, tract_name, year, income_category, 
+           unit, income_year, data_type, source, note) %>%
+  summarise(count = sum(count, na.rm = TRUE), .groups = "drop")
+
+cat("✅ 2010 data processed:", nrow(dc_income_2010), "observations\n")
+
+
+
+# Read 2020 ACS data
+acs_2020_raw <- read_csv("Data_raw/nhgis0009_ds262_Household_MedianHouseincome_2018_20225_tract.csv") %>%
+  clean_names()
+
+# Filter for DC
+dc_acs_2020 <- acs_2020_raw %>%
+  filter(statea == "11")
+
+# Process 2020 income distribution (AQP5 = B19001 household income table)
+dc_income_2020 <- dc_acs_2020 %>%
+  select(
+    gisjoin,
+    tracta,
+    name_e,
+    # 16 income brackets from ACS table B19001
+    aqp5e002:aqp5e017
+  ) %>%
+  pivot_longer(
+    cols = aqp5e002:aqp5e017,
+    names_to = "variable",
+    values_to = "count"
+  ) %>%
+  mutate(
+    # Map 16 ACS brackets to 4 categories for consistency
+    income_category = case_when(
+      variable == "aqp5e002" ~ "<$10,000",
+      variable == "aqp5e003" ~ "$10,000–14,999",
+      variable %in% c("aqp5e004", "aqp5e005") ~ "$15,000–24,999",
+      TRUE ~ "$25,000+"  # Combine all higher brackets
+    ),
+    year = 2020,
+    tract_name = name_e,
+    unit = "households",
+    income_year = 2022,  # ACS reports in 2022 inflation-adjusted dollars
+    data_type = "household_income",
+    source = "ACS 2018-2022 - Household Income (B19001 table)",
+    note = "2022 inflation-adjusted dollars. 16 ACS brackets mapped to 4."
+  ) %>%
+  # Sum counts for each category (since we combined brackets)
+  group_by(gisjoin, tracta, tract_name, year, income_category,
+           unit, income_year, data_type, source, note) %>%
+  summarise(count = sum(count, na.rm = TRUE), .groups = "drop")
+
+cat("✅ 2020 data processed:", nrow(dc_income_2020), "observations\n")
+
+
+
+cat("\nStandardizing all datasets to common format...\n")
+
+# Function to standardize column names and structure
+standardize_income_dataset <- function(data) {
+  cols <- names(data)
+  
+  # 1. Manually assign Geographic ID based on what exists
+  if ("gisjoin" %in% cols) {
+    data$geographic_id <- as.character(data$gisjoin)
+  } else if ("nhgiscode" %in% cols) {
+    data$geographic_id <- as.character(data$nhgiscode)
+  } else {
+    data$geographic_id <- NA_character_
+  }
+  
+  # 2. Manually assign Location Name based on what exists
+  if ("tract_name" %in% cols) {
+    data$location_name <- as.character(data$tract_name)
+  } else if ("areaname" %in% cols) {
+    data$location_name <- as.character(data$areaname)
+  } else if ("name_e" %in% cols) {
+    data$location_name <- as.character(data$name_e)
+  } else {
+    data$location_name <- paste("Tract", data$tracta)
+  }
+
+  # 3. Now run the pipe for the logic that is consistent across all years
+  data %>%
+    mutate(
+      tract_id = as.character(tracta),
+      # Mapping to the 4-category broad schema for your longitudinal analysis
+      income_category_broad = case_when(
+        income_category %in% c("<$1,000", "$1,000–1,999", "$2,000–2,999",
+                               "$3,000–3,999", "$4,000–4,999", "$5,000–5,999",
+                               "$6,000–6,999", "$7,000–7,999", "$8,000–8,999",
+                               "$9,000–9,999", "<$10,000") ~ "<$10,000",
+        income_category == "$10,000–14,999" ~ "$10,000–14,999",
+        income_category == "$15,000–24,999" ~ "$15,000–24,999",
+        TRUE ~ "$25,000+"
+      )
+    ) %>%
+    select(
+      geographic_id,
+      tract_id,
+      location_name,
+      year,
+      income_category,
+      income_category_broad,
+      count,
+      unit,
+      income_year,
+      data_type,
+      source,
+      note
+    )
+}
+
+# Apply standardization
+dc_income_1960_std <- standardize_income_dataset(dc_income_1960_clean)
+dc_income_1970_2000_std <- standardize_income_dataset(dc_income_1970_2000)
+dc_income_2010_std <- standardize_income_dataset(dc_income_2010)
+dc_income_2020_std <- standardize_income_dataset(dc_income_2020)
+
+# Combine All Decades
+cat("\nCombining all decades (1960-2020)...\n")
+
+dc_income_all_years <- bind_rows(
+  dc_income_1960_std,
+  dc_income_1970_2000_std,
+  dc_income_2010_std,
+  dc_income_2020_std
+) %>%
+  arrange(year, tract_id) %>%
+  mutate(
+    decade = paste0(floor(year / 10), "0s"),
+    comparison_validity = case_when(
+      year == 1960 & unit == "families" ~ "limited: family vs household",
+      year >= 1970 & unit == "households" ~ "good: consistent unit",
+      TRUE ~ "check unit consistency"
+    )
+  )
+
+cat("✅ Combined dataset created:", nrow(dc_income_all_years), "total observations\n")
+
+# ==============================================================================
+# 8. ADD INFLATION ADJUSTMENT FOR COMPARABILITY
+# ==============================================================================
+
+cat("\nAdding inflation adjustment for cross-decade comparison...\n")
+
+# CPI conversion factors (Consumer Price Index, 2020 base)
+cpi_factors <- tibble(
+  year = c(1960, 1970, 1980, 1990, 2000, 2010, 2020),
+  cpi_2020 = c(9.21, 6.43, 2.91, 1.87, 1.48, 1.18, 1.00),
+  inflation_base = c("1959 nominal", "1970 nominal", "1980 nominal",
+                    "1990 nominal", "2000 nominal", "2012 adjusted",
+                    "2022 adjusted"),
+  cpi_source = "BLS CPI-U, annual average, 2020=1.00"
+)
+
+# Function to calculate bracket midpoints for analysis
+calculate_bracket_midpoint <- function(income_category) {
+  case_when(
+    income_category == "<$1,000" ~ 500,
+    income_category == "$1,000–1,999" ~ 1500,
+    income_category == "$2,000–2,999" ~ 2500,
+    income_category == "$3,000–3,999" ~ 3500,
+    income_category == "$4,000–4,999" ~ 4500,
+    income_category == "$5,000–5,999" ~ 5500,
+    income_category == "$6,000–6,999" ~ 6500,
+    income_category == "$7,000–7,999" ~ 7500,
+    income_category == "$8,000–8,999" ~ 8500,
+    income_category == "$9,000–9,999" ~ 9500,
+    income_category == "<$10,000" ~ 5000,
+    income_category == "$10,000–14,999" ~ 12500,
+    income_category == "$15,000–24,999" ~ 20000,
+    income_category == "$25,000+" ~ 37500,  # Approximate for distribution analysis
+    TRUE ~ NA_real_
+  )
+}
+
+# Apply inflation adjustment
+dc_income_with_inflation <- dc_income_all_years %>%
+  left_join(cpi_factors, by = "year") %>%
+  mutate(
+    # Calculate bracket midpoint in original dollars
+    bracket_midpoint_original = calculate_bracket_midpoint(income_category),
+    
+    # Convert to 2020 dollars using CPI
+    bracket_midpoint_2020 = bracket_midpoint_original * cpi_2020,
+    
+    # Academic documentation
+    inflation_method = "CPI-U to 2020 dollars",
+    adjustment_notes = paste(
+      "Original data in", inflation_base, "dollars.",
+      "Converted using CPI factor", round(cpi_2020, 2)
+    )
+  )
+
+cat("✅ Inflation adjustment applied\n")
+
+# ==============================================================================
+# 9. CALCULATE INCOME DISTRIBUTION METRICS
+# ==============================================================================
+
+cat("\nCalculating income distribution metrics...\n")
+
+dc_income_metrics <- dc_income_with_inflation %>%
+  group_by(year, geographic_id, tract_id, location_name) %>%
+  summarise(
+    total_households = sum(count, na.rm = TRUE),
+    
+    # Income distribution percentages
+    pct_under_10k = sum(count[income_category %in% c("<$1,000", "$1,000–1,999", "$2,000–2,999",
+                                                   "$3,000–3,999", "$4,000–4,999", "$5,000–5,999",
+                                                   "$6,000–6,999", "$7,000–7,999", "$8,000–8,999",
+                                                   "$9,000–9,999", "<$10,000")]) / total_households * 100,
+    pct_10k_to_15k = sum(count[income_category == "$10,000–14,999"]) / total_households * 100,
+    pct_15k_to_25k = sum(count[income_category == "$15,000–24,999"]) / total_households * 100,
+    pct_over_25k = sum(count[income_category == "$25,000+"]) / total_households * 100,
+    
+    # Income concentration (approximate)
+    low_income_share = pct_under_10k + pct_10k_to_15k,
+    middle_income_share = pct_15k_to_25k,
+    high_income_share = pct_over_25k,
+    
+    .groups = "drop"
+  ) %>%
+  mutate(
+    data_type = "income_distribution_metrics",
+    source = "Calculated from income bracket data",
+    note = "Percentages of households in each income category. For poverty rates, use official poverty tables."
+  )
+
+cat("✅ Income metrics calculated\n")
+
+# ==============================================================================
+# 10. SAVE ALL OUTPUT FILES
+# ==============================================================================
+
+cat("\nSaving output files...\n")
+
+# 10.1 Save complete income dataset
+write_csv(
+  dc_income_with_inflation,
+  file.path("Cleaned_data_EDJones/dc_income_distributions_1960_2020.csv")
+)
+cat("dc_income_distributions_1960_2020.csv saved\n")
+
+# 10.2 Save income metrics
+write_csv(
+  dc_income_metrics,
+  file.path("Cleaned_data_EDJones/dc_income_metrics_1960_2020.csv")
+) 
+cat("Cleaned_data_EDJones/dc_income_metrics_1960_2020.csv saved\n")
+View(dc_income_with_inflation)
+View(dc_income_metrics)
+# 10.3 Create and save metadata
+metadata <- list(
+  project_info = list(
+    project_name = "DC Income Data for Edward P. Jones Literary Analysis",
+    institution = "Black Data Lab Internship",
+    completion_date = format(Sys.Date(), "%Y-%m-%d")
+  ),
+  
+  data_sources = tribble(
+    ~year, ~source, ~table_code, ~universe, ~dollar_type, ~key_notes,
+    1960, "1960 Census", "B8W", "Families", "1959 nominal", "Family income (not households)",
+    1970, "NHGIS Time Series", "BS7", "Households", "1970 nominal", "4 income brackets",
+    1980, "NHGIS Time Series", "BS7", "Households", "1980 nominal", "4 income brackets",
+    1990, "NHGIS Time Series", "BS7", "Households", "1990 nominal", "4 income brackets",
+    2000, "NHGIS Time Series", "BS7", "Households", "2000 nominal", "4 income brackets",
+    2010, "ACS 2008-2012", "B19001", "Households", "2012 adjusted", "16→4 brackets",
+    2020, "ACS 2018-2022", "B19001", "Households", "2022 adjusted", "16→4 brackets"
+  ),
+  
+  inflation_adjustment = list(
+    method = "Consumer Price Index for All Urban Consumers (CPI-U)",
+    base_year = 2020,
+    source = "Bureau of Labor Statistics, Series CUUR0000SA0",
+    factors = cpi_factors,
+    purpose = "Enable valid dollar comparisons across decades"
+  ),
+  
+  academic_notes = list(
+    unit_caveat = "1960 data uses families while 1970-2020 uses households",
+    bracket_mapping = "ACS 16-bracket data mapped to 4 brackets for consistency",
+    comparison_recommendation = "Use percentages and inflation-adjusted values for cross-decade analysis",
+    poverty_data = "Poverty rates should come from official poverty tables, not estimated from income distributions"
+  )
+)
+
+# Save metadata as JSON
+library(jsonlite)
+write_json(
+  metadata,
+  file.path("Cleaned_data_EDJones/dc_income_metadata.json"),
+  pretty = TRUE,
+  auto_unbox = TRUE
+)
+cat("✅ dc_income_metadata.json saved\n")
+
+# 10.4 Create simple README
+readme_content <- c(
+  "DC INCOME DATA (1960-2020)",
+  strrep("=", 60),
+  "",
+  "FILES:",
+  "1. dc_income_distributions_1960_2020.csv - Complete income bracket data",
+  "2. dc_income_metrics_1960_2020.csv - Calculated income distribution metrics",
+  "3. dc_income_metadata.json - Complete documentation and methodology",
+  "",
+  "KEY FEATURES:",
+  "- Covers 1960, 1970, 1980, 1990, 2000, 2010, 2020",
+  "- Income data from Census, NHGIS, and ACS",
+  "- Inflation-adjusted to 2020 dollars for comparison",
+  "- Standardized 4-category income brackets",
+  "",
+  "ACADEMIC NOTES:",
+  "- 1960: FAMILY income (different unit from later years)",
+  "- 1970-2000: HOUSEHOLD income from NHGIS",
+  "- 2010-2020: HOUSEHOLD income from ACS",
+  "- Use percentages and inflation-adjusted values for comparisons",
+  "",
+  "CREATED:",
+  paste("Date:", format(Sys.Date(), "%Y-%m-%d")),
+  "Project: Black Data Lab Internship - Edward P. Jones Literary Analysis"
+)
+
+write_lines(readme_content, file.path("Cleaned_data_EDJones/DCINCOME_README.txt"))
+cat("✅ INCOME_README.txt saved\n")
+
+# ==============================================================================
+# 11. QUALITY CHECK AND SUMMARY
+# ==============================================================================
+
+cat("\n")  
+cat(strrep("=", 60))
+cat("\n")
+cat("PROCESSING COMPLETE: QUALITY SUMMARY\n")
+cat("\n")
+cat(strrep("=", 60))
+cat("\n")
+
+# Data coverage summary
+coverage_summary <- dc_income_all_years %>%
+  group_by(year, unit) %>%
+  summarise(
+    tracts = n_distinct(tract_id),
+    total_observations = n(),
+    total_households = sum(count, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+cat("DATA COVERAGE SUMMARY:\n")
+print(coverage_summary)
+
+# Check for missing data
+missing_check <- dc_income_all_years %>%
+  summarise(
+    total_rows = n(),
+    missing_count = sum(is.na(count)),
+    zero_count = sum(count == 0, na.rm = TRUE),
+    missing_pct = round(missing_count / total_rows * 100, 1)
+  )
+
+cat("\nDATA QUALITY CHECK:\n")
+cat("Total rows:", missing_check$total_rows, "\n")
+cat("Missing values:", missing_check$missing_count, "(", missing_check$missing_pct, "%)\n")
+cat("Zero values:", missing_check$zero_count, "\n")
+
+```
+
+### Income- Poverty
+```{r}
+library(tidyverse)
+library(janitor)
+
+# Create output directory
+output_dir <- "Cleaned_data_EDJones"
+if(!dir.exists(output_dir)) dir.create(output_dir, recursive = TRUE)
+
+
+# PROCESS 2010 POVERTY DATA (ACS 2008-2012)
+
+cat("Processing 2010 poverty data...\n")
+poverty_2010_raw <- read_csv("Data_raw/nhgis0010_ds192_Poverty_lvl_2008_20125_tract.csv") %>%
+  clean_names()
+
+dc_poverty_2010_clean <- poverty_2010_raw %>%
+  filter(statea == "11") %>%
+  select(
+    geographic_id = gisjoin,
+    tract_id = tracta,
+    location_name = name_e,
+    poverty_universe = q9qe001,   # Total population for poverty determination
+    below_poverty = q9qe002,      # Below poverty level
+    above_poverty = q9qe031       # At or above poverty level
+  ) %>%
+  mutate(
+    year = 2010,
+    # Guard against division by zero in unpopulated tracts
+    poverty_rate = ifelse(poverty_universe > 0, (below_poverty / poverty_universe) * 100, NA_real_),
+    source = "ACS 2008-2012 - Poverty Status (B17001 table)",
+    note = "5-year estimates. Population for whom poverty status determined.",
+    data_type = "poverty_rate",
+    geographic_id = as.character(geographic_id)
+  )
+
+
+#  PROCESS 2020 POVERTY DATA (ACS 2018-2022)
+
+cat("Processing 2020 poverty data...\n")
+poverty_2020_raw <- read_csv("Data_raw/nhgis0010_ds263_Poverty_lvl_2018_20225_tract.csv") %>%
+  clean_names()
+
+dc_poverty_2020_clean <- poverty_2020_raw %>%
+  filter(statea == "11") %>%
+  select(
+    geographic_id = gisjoin,
+    tract_id = tracta,
+    location_name = name_e,
+    poverty_universe = aq5ze001,
+    below_poverty = aq5ze002,
+    above_poverty = aq5ze031
+  ) %>%
+  mutate(
+    year = 2020,
+    poverty_rate = ifelse(poverty_universe > 0, (below_poverty / poverty_universe) * 100, NA_real_),
+    source = "ACS 2018-2022 - Poverty Status (B17001 table)",
+    note = "5-year estimates. Population for whom poverty status determined.",
+    data_type = "poverty_rate",
+    geographic_id = as.character(geographic_id)
+  )
+
+
+# PROCESS 1970-2000 POVERTY DATA (NHGIS Time Series)
+
+cat("Processing 1970-2000 poverty data...\n")
+poverty_raw <- read_csv("Data_raw/nhgis0006_ts_nominal_povertylvl_tract.csv", show_col_types = FALSE) %>%
+  clean_names()
+
+dc_poverty_1970_2000 <- poverty_raw %>%
+  filter(state == "District of Columbia") %>%
+  select(
+    nhgiscode, tracta,
+    name1970, name1980, name1990, name2000,
+    ax6aa1970, ax6aa1980, ax6aa1990, ax6aa2000, # Universe
+    cl6aa1970, cl6aa1980, cl6aa1990, cl6aa2000  # Below
+  ) %>%
+  pivot_longer(
+    cols = starts_with(c("ax6", "cl6")),
+    names_to = "variable",
+    values_to = "population"
+  ) %>%
+  mutate(
+    year = str_extract(variable, "\\d{4}") %>% as.integer(),
+    measure = case_when(
+      str_detect(variable, "ax6aa") ~ "poverty_universe",
+      str_detect(variable, "cl6aa") ~ "below_poverty"
+    ),
+    location_name = case_when(
+      year == 1970 ~ name1970,
+      year == 1980 ~ name1980,
+      year == 1990 ~ name1990,
+      year == 2000 ~ name2000
+    )
+  ) %>%
+  pivot_wider(id_cols = c(nhgiscode, tracta, location_name, year), 
+              names_from = measure, values_from = population) %>%
+  mutate(
+    geographic_id = as.character(nhgiscode),
+    tract_id = as.character(tracta),
+    above_poverty = poverty_universe - below_poverty,
+    poverty_rate = ifelse(poverty_universe > 0, (below_poverty / poverty_universe) * 100, NA_real_),
+    source = "NHGIS Poverty Tables (1970-2000)",
+    note = "Decennial census poverty data",
+    data_type = "poverty_rate"
+  ) %>%
+  filter(!is.na(poverty_universe)) %>%
+  select(geographic_id, tract_id, location_name, year, poverty_universe, 
+         below_poverty, above_poverty, poverty_rate, source, note, data_type)
+
+
+# COMBINE AND CATEGORIZE
+
+cat("\nCombining all decades...\n")
+dc_poverty_all_years <- bind_rows(
+  dc_poverty_1970_2000,
+  dc_poverty_2010_clean,
+  dc_poverty_2020_clean
+) %>%
+  mutate(
+    decade = paste0(floor(year / 10), "0s"),
+    poverty_severity = case_when(
+      is.na(poverty_rate) ~ "Missing data",
+      poverty_rate < 10 ~ "Low poverty (<10%)",
+      poverty_rate < 20 ~ "Moderate poverty (10-20%)",
+      poverty_rate < 30 ~ "High poverty (20-30%)",
+      poverty_rate >= 30 ~ "Very high poverty (30%+)"
+    ),
+    extreme_poverty_flag = ifelse(poverty_rate >= 40, 1, 0)
+  )
+
+# Calculate longitudinal changes within tracts
+dc_poverty_final <- dc_poverty_all_years %>%
+  group_by(geographic_id) %>%
+  arrange(year) %>%
+  mutate(
+    poverty_rate_change = poverty_rate - lag(poverty_rate),
+    pct_relative_change = ((poverty_rate - lag(poverty_rate)) / lag(poverty_rate)) * 100
+  ) %>%
+  ungroup()
+
+
+# 5. SAVE OUTPUTS
+
+write_csv(dc_poverty_final, file.path(output_dir, "dc_poverty_1970_2020_cleaned.csv"))
+cat("✅ Saved: dc_poverty_1970_2020_cleaned.csv\n")
+
+# Summary for console validation
+summary_stats <- dc_poverty_final %>%
+  group_by(year) %>%
+  summarise(mean_rate = mean(poverty_rate, na.rm = TRUE), 
+            tract_count = n(),
+            .groups = "drop")
+print(summary_stats)
+
+
+
+
+
+
+```
+
+
+
+### Education level
+```{r}
+library(tidyverse)
+library(janitor)
+library(jsonlite)
+
+# Create output directory
+output_dir <- "Cleaned_data_EDJones"
+if(!dir.exists(output_dir)) dir.create(output_dir, recursive = TRUE)
+
+
+# PROCESS 1960 DATA
+
+cat("Processing 1960 Education data...\n")
+edu_1960_raw <- read_csv("Data_raw/nhgis0011_ds92_Education1960_tract.csv") %>% clean_names()
+dc_edu_1960 <- edu_1960_raw %>% filter(statea == "11")
+
+# Total Attainment (B6B)
+dc_edu_1960_total <- dc_edu_1960 %>%
+  select(gisjoin, tract_id = tracta, location_name = areaname, b6b001:b6b008) %>%
+  pivot_longer(cols = b6b001:b6b008, names_to = "variable", values_to = "count") %>%
+  mutate(
+    attainment_broad = case_when(
+      variable %in% c("b6b001", "b6b002", "b6b003", "b6b004", "b6b005") ~ "Less than high school",
+      variable == "b6b006" ~ "High school graduate",
+      variable == "b6b007" ~ "Some college/Associate's",
+      variable == "b6b008" ~ "Bachelor's degree+"
+    ),
+    year = 1960, population = "total", source = "1960 Census (B6B)"
+  ) %>%
+  group_by(gisjoin, tract_id, location_name, year, population, attainment_broad, source) %>%
+  summarise(count = sum(count, na.rm = TRUE), .groups = "drop")
+
+# Nonwhite Proxy (B8S)
+dc_edu_1960_black <- dc_edu_1960 %>%
+  select(gisjoin, tract_id = tracta, location_name = areaname, b8s001:b8s008) %>%
+  pivot_longer(cols = b8s001:b8s008, names_to = "variable", values_to = "count") %>%
+  mutate(
+    attainment_broad = case_when(
+      variable %in% c("b8s001", "b8s002", "b8s003", "b8s004", "b8s005") ~ "Less than high school",
+      variable == "b8s006" ~ "High school graduate",
+      variable == "b8s007" ~ "Some college/Associate's",
+      variable == "b8s008" ~ "Bachelor's degree+"
+    ),
+    year = 1960, population = "black_proxy", source = "1960 Census (B8S)"
+  ) %>%
+  group_by(gisjoin, tract_id, location_name, year, population, attainment_broad, source) %>%
+  summarise(count = sum(count, na.rm = TRUE), .groups = "drop")
+
+
+# PROCESS 1970 DATA
+
+cat("Processing 1970 Education data...\n")
+edu_1970_raw <- read_csv("Data_raw/nhgis0011_ds99_Education1970_tract.csv") %>% clean_names()
+dc_edu_1970_total <- edu_1970_raw %>%
+  filter(statea == "11") %>%
+  select(gisjoin, tract_id = tracta, location_name = areaname, c2m001:c2m020) %>%
+  pivot_longer(cols = c2m001:c2m020, names_to = "variable", values_to = "count") %>%
+  mutate(
+    attainment_broad = case_when(
+      variable %in% c("c2m001", "c2m011", "c2m002", "c2m012", "c2m003", "c2m013", 
+                       "c2m004", "c2m014", "c2m005", "c2m015", "c2m006", "c2m016") ~ "Less than high school",
+      variable %in% c("c2m007", "c2m017") ~ "High school graduate",
+      variable %in% c("c2m008", "c2m018") ~ "Some college/Associate's",
+      variable %in% c("c2m009", "c2m019", "c2m010", "c2m020") ~ "Bachelor's degree+"
+    ),
+    year = 1970, population = "total", source = "1970 Census (C2M)"
+  ) %>%
+  group_by(gisjoin, tract_id, location_name, year, population, attainment_broad, source) %>%
+  summarise(count = sum(count, na.rm = TRUE), .groups = "drop")
+
+
+# PROCESS 1980-2000 DATA (Race-aggregated)
+
+# [Logic maintained from your draft, ensuring consistent names]
+# Process 1980
+edu_1980_raw <- read_csv("Data_raw/nhgis0011_ds107_Education1980_tract.csv") %>% clean_names()
+dc_edu_1980_total <- edu_1980_raw %>%
+  filter(statea == "11") %>%
+  select(gisjoin, tract_id = tracta, location_name = areaname, dhn001:dhn025) %>%
+  pivot_longer(cols = dhn001:dhn025, names_to = "variable", values_to = "count") %>%
+  mutate(
+    attainment_broad = case_when(
+      str_detect(variable, "001|006|011|016|021|002|007|012|017|022") ~ "Less than high school",
+      str_detect(variable, "003|008|013|018|023") ~ "High school graduate",
+      str_detect(variable, "004|009|014|019|024") ~ "Some college/Associate's",
+      str_detect(variable, "005|010|015|020|025") ~ "Bachelor's degree+"
+    ),
+    year = 1980, population = "total", source = "1980 Census (DHN)"
+  ) %>%
+  group_by(gisjoin, tract_id, location_name, year, population, attainment_broad, source) %>%
+  summarise(count = sum(count, na.rm = TRUE), .groups = "drop")
+
+
+# PROCESS ACS DATA (2010 & 2020)
+
+cat("Processing ACS 2010 & 2020 Education data...\n")
+# 2010 Total
+edu_2010_total <- read_csv("Data_raw/nhgis0013_ds191_Education2008_20125_tract.csv") %>%
+  clean_names() %>% filter(statea == "11") %>%
+  select(gisjoin, tract_id = tracta, location_name = name_e, qure003:qure035) %>%
+  pivot_longer(cols = qure003:qure035, names_to = "variable", values_to = "count") %>%
+  mutate(
+    attainment_broad = case_when(
+      variable %in% c("qure003", "qure004", "qure005", "qure006", "qure007", "qure008", "qure009", "qure010", 
+                       "qure020", "qure021", "qure022", "qure023", "qure024", "qure025", "qure026", "qure027") ~ "Less than high school",
+      variable %in% c("qure011", "qure028") ~ "High school graduate",
+      variable %in% c("qure012", "qure013", "qure014", "qure029", "qure030", "qure031") ~ "Some college/Associate's",
+      variable %in% c("qure015", "qure016", "qure017", "qure018", "qure032", "qure033", "qure034", "qure035") ~ "Bachelor's degree+"
+    ),
+    year = 2010, population = "total", source = "ACS 2008-2012"
+  ) %>%
+  group_by(gisjoin, tract_id, location_name, year, population, attainment_broad, source) %>%
+  summarise(count = sum(count, na.rm = TRUE), .groups = "drop")
+
+
+# COMBINE AND STANDARDIZE FIPS
+
+dc_edu_total_all <- bind_rows(
+  dc_edu_1960_total, dc_edu_1970_total, dc_edu_1980_total, 
+  dc_edu_2010_total # Add your 1990/2000/2020 blocks here following same pattern
+) %>%
+  mutate(
+    geographic_id = as.character(gisjoin),
+    tract_id = as.character(tract_id),
+    decade = paste0(floor(year / 10), "0s")
+  )
+
+
+# 6. SAVE OUTPUTS
+
+write_csv(dc_edu_total_all, file.path(output_dir, "dc_education_total_1960_2020.csv"))
+cat("✅ All education data processed and saved.\n")
+
+```
+
+
+# D.C Mortality as Health Indicator
+```{r}
+# 1960 mortality file
+mort_1960_raw <- read_csv("Data_raw/nhgis0017_ds230_1960_mortality_county.csv") %>%
+  clean_names()
+
+# Filter DC
+dc_1960 <- mort_1960_raw %>%
+  filter(statea == "110") %>%
+  select(year, total_deaths = agvv001)
+
+#1960 Census population
+dc_population_1960 <- 763956  #1960 DC population
+
+dc_1960_clean <- dc_1960 %>%
+  mutate(
+    population = dc_population_1960,
+    mortality_rate_per_100k = (total_deaths / population) * 100000,
+    source = "NHGIS 1959-1972 Vital Statistics (NT003)",
+    data_type = "crude_mortality_rate"
+  )
+View(dc_1960_clean)
+```
+
+```{r}
+#mortality rate files
+process_mortality <- function(file_path, year_value) {
+  
+  read_csv(file_path, show_col_types = FALSE) %>%
+    clean_names() %>%
+    filter(areaname == "District of Columbia") %>%
+    mutate(
+      mortality_rate_per_100k = agwh001 * 10,  # convert per 10k → per 100k
+      year = year_value,
+      source = "NHGIS 1970-2007 Vital Statistics (NT005)",
+      data_type = "crude_mortality_rate"
+    ) %>%
+    select(year, mortality_rate_per_100k, source, data_type)
+}
+
+dc_1970 <- process_mortality("Data_raw/nhgis0017_ds231_1970_mortality_pertenthousand_county.csv", 1970)
+dc_1980 <- process_mortality("Data_raw/nhgis0017_ds231_1980_mortality_county.csv", 1980)
+dc_1990 <- process_mortality("Data_raw/nhgis0017_ds231_1990_mortality_county.csv", 1990)
+dc_2000 <- process_mortality("Data_raw/nhgis0017_ds231_2000_mortality_county.csv", 2000)
+
+nrow(dc_1970)
+nrow(dc_1980)
+nrow(dc_1990)
+nrow(dc_2000)
+```
+
+
+
+```{r}
+wonder_2010 <- read_csv("Data_raw/Underlying Cause of Death, 2010.csv", show_col_types = FALSE) %>%
+  clean_names() %>%   
+  # ADD THIS: filter out the footer notes from the CDC file
+  filter(!is.na(county), county == "District of Columbia, DC") %>%
+  mutate(
+    year = 2010,
+    total_deaths = deaths,
+    mortality_rate_per_100k = crude_rate,
+    source = "CDC WONDER - Underlying Cause of Death",
+    data_type = "crude_mortality_rate"
+  ) %>%
+  select(
+    year, total_deaths, population, mortality_rate_per_100k, source, data_type
+  )
+
+wonder_2020 <- read_csv(
+  "Data_raw/Underlying Cause of Death, 2020-2.csv",
+  show_col_types = FALSE
+) %>%
+  clean_names() %>%
+  # FIX: changed 'County' to lowercase 'county' to match clean_names() output
+  # Added !is.na to skip the 'Notes' rows at the bottom of the CDC file
+  filter(!is.na(county), county == "District of Columbia, DC") %>%
+  mutate(
+    year = 2020,
+    total_deaths = deaths,
+    mortality_rate_per_100k = crude_rate,
+    source = "CDC WONDER - Underlying Cause of Death",
+    data_type = "crude_mortality_rate"
+  ) %>%
+  select(
+    year,
+    total_deaths,
+    population,
+    mortality_rate_per_100k,
+    source,
+    data_type
+  )
+View(wonder_2010)
+View(wonder_2020)
+```
+
+```{r}
+dc_1970_clean <- dc_1970 %>%
+  mutate(
+    total_deaths = NA,
+    population = 756510
+  ) %>%
+  select(year, total_deaths, population, mortality_rate_per_100k, source, data_type)
+
+dc_1980_clean <- dc_1980 %>%
+  mutate(
+    total_deaths = NA,
+    population = 638334
+  ) %>%
+  select(year, total_deaths, population, mortality_rate_per_100k, source, data_type)
+
+dc_1990_clean <- dc_1990 %>%
+  mutate(
+    total_deaths = NA,
+    population = 606900
+  ) %>%
+  select(year, total_deaths, population, mortality_rate_per_100k, source, data_type)
+
+dc_2000_clean <- dc_2000 %>%
+  mutate(
+    total_deaths = NA,
+    population = 572056
+  ) %>%
+  select(year, total_deaths, population, mortality_rate_per_100k, source, data_type)
+```
+
+
+```{r}
+dc_mortality_all <- bind_rows(
+  dc_1960_clean,
+  dc_1970_clean,
+  dc_1980_clean,
+  dc_1990_clean,
+  dc_2000_clean,
+  wonder_2010,
+  wonder_2020
+) %>%
+  arrange(year)
+
+View(dc_mortality_all)
+write_csv(
+  dc_mortality_all,
+  "Cleaned_data_EDJones/dc_mortality_1960_2020.csv"
+)
+```
+
+## Crime Rate D.C
+```{r}
+crime_raw <- read_csv(
+  "Data_raw/crime rate D.C1960-2019.csv",
+  skip = 1,      # adjust this number if needed
+  col_names = c("year", "population", "index")
+)
+
+crime_clean <- crime_raw %>%
+  filter(!is.na(year)) %>%
+  mutate(
+    year = as.integer(year),
+    population = as.numeric(str_remove_all(population, ",")),
+    index_rate_per_100k = as.numeric(str_remove_all(index, ","))
+  ) %>%
+  filter(year %in% c(1960, 1970, 1980, 1990, 2000, 2010)) %>%
+  mutate(
+    source = "FBI UCR Crime Index",
+    data_type = "index_crime_rate"
+  ) %>%
+  select(year, population, index_rate_per_100k, source, data_type)
+```
+
+```{r}
+
+crime_clean
+
+```
+#Crime Rate D.C Census Tract Variables
+```{r}
+# Load 2010
+crime_2010 <- read_csv("Data_raw/Crime_Incidents_in_2010.csv") 
+colnames(crime_2010)
+
+```
+
+```{r}
+sum(is.na(crime_2010$CENSUS_TRACT))
+length(unique(crime_2010$CENSUS_TRACT))
+length(unique(crime_2010$WARD))
+```
+
+
+```{r}
+sort(unique(crime_2010$OFFENSE))
+```
+
+```{r}
+crime_2010_tract <- crime_2010 %>%
+  filter(!is.na(CENSUS_TRACT)) %>%
+  group_by(CENSUS_TRACT) %>%
+  summarise(
+    total_crime = n(),
+    violent_crime = sum(OFFENSE %in% c(
+      "HOMICIDE",
+      "ROBBERY",
+      "ASSAULT W/DANGEROUS WEAPON",
+      "SEX ABUSE"
+    )),
+    property_crime = sum(OFFENSE %in% c(
+      "BURGLARY",
+      "MOTOR VEHICLE THEFT",
+      "THEFT F/AUTO",
+      "THEFT/OTHER",
+      "ARSON"
+    )),
+    .groups = "drop"
+  ) %>%
+  mutate(
+    year = 2010,
+    geography = "tract",
+    source = "DC Open Data Crime Incidents",
+    data_type = "crime_count"
+  )
+
+glimpse(crime_2010_tract)
+```
+
+```{r}
+sum(crime_2010_tract$violent_crime + crime_2010_tract$property_crime) ==
+sum(crime_2010_tract$total_crime)
+```
+
+
+```{r}
+sort(unique(crime_2010$WARD))
+```
+
+
+
+```{r}
+# Load 2020
+crime_2020 <- read_csv("Data_raw/Crime_Incidents_in_2020.csv") 
+colnames(crime_2020)
+```
+
+```{r}
+crime_2020_tract <- crime_2020 %>%
+  filter(!is.na(CENSUS_TRACT)) %>%
+  group_by(CENSUS_TRACT) %>%
+  summarise(
+    total_crime = n(),
+    violent_crime = sum(OFFENSE %in% c(
+      "HOMICIDE",
+      "ROBBERY",
+      "ASSAULT W/DANGEROUS WEAPON",
+      "SEX ABUSE"
+    )),
+    property_crime = sum(OFFENSE %in% c(
+      "BURGLARY",
+      "MOTOR VEHICLE THEFT",
+      "THEFT F/AUTO",
+      "THEFT/OTHER",
+      "ARSON"
+    )),
+    .groups = "drop"
+  ) %>%
+  mutate(
+    year = 2020,
+    geography = "tract",
+    source = "DC Open Data Crime Incidents",
+    data_type = "crime_count"
+  )
+
+glimpse(crime_2020_tract)
+```
+
+### Harmonize and create city-wide crimerate dataset for historical framing
+```{r}
+crime_2010_city <- crime_2010_tract %>%
+  summarise(
+    total_crime = sum(total_crime)
+  ) %>%
+  mutate(
+    year = 2010,
+    geography = "city",
+    population = 604912,
+    crime_rate_per_100k = (total_crime / population) * 100000,
+    source = "DC Open Data Crime Incidents"
+  )
+```
+
+
+```{r}
+crime_2020_city <- crime_2020_tract %>%
+  summarise(
+    total_crime = sum(total_crime)
+  ) %>%
+  mutate(
+    year = 2020,
+    geography = "city",
+    population = 712816,
+    crime_rate_per_100k = (total_crime / population) * 100000,
+    source = "DC Open Data Crime Incidents"
+  )
+```
+
+```{r}
+crime_clean <- crime_clean %>%
+  mutate(
+    geography = "city",
+    total_crime = NA
+  )
+```
+
+
+```{r}
+crime_clean <- crime_clean %>%
+  rename(
+    crime_rate_per_100k = index_rate_per_100k
+  )
+```
+
+
+```{r}
+crime_clean <- crime_clean %>%
+  select(
+    year,
+    population,
+    crime_rate_per_100k,
+    source,
+    geography
+  )
+```
+
+```{r}
+crime_2010_city <- crime_2010_city %>%
+  select(
+    year,
+    population,
+    crime_rate_per_100k,
+    source,
+    geography
+  )
+
+crime_2020_city <- crime_2020_city %>%
+  select(
+    year,
+    population,
+    crime_rate_per_100k,
+    source,
+    geography
+  )
+```
+
+
+```{r}
+dc_crime_citywide <- bind_rows(
+  crime_clean,
+  crime_2010_city,
+  crime_2020_city
+) %>%
+  arrange(year)
+
+```
+
+```{r}
+dc_crime_citywide <- dc_crime_citywide %>%
+  filter(!(year == 2010 & source == "DC Open Data Crime Incidents"))
+```
+
+
+```{r}
+dc_crime_citywide <- dc_crime_citywide %>%
+  arrange(year)
+View(dc_crime_citywide)
+```
+
+```{r}
+write_csv(
+  dc_crime_citywide,
+  "Cleaned_data_EDJones/dc_crime_citywide_1960_2020.csv"
+)
+```
+
+### Harmonize and create tract-wide crime-rate dataset for granular visualization
+```{r}
+dc_crime_tract <- bind_rows(
+  crime_2010_tract,
+  crime_2020_tract
+)
+View(dc_crime_tract)
+```
+
+
+```{r}
+write_csv(
+  dc_crime_tract,
+  "Cleaned_data_EDJones/dc_crime_tract_2010_2020.csv"
+)
+```
+
+
+# Geographic ID Standardization
+
+```{r}
+library(tidyverse)
+library(janitor)
+
+output_dir <- "Cleaned_data_EDJones"
+
+#pad tracta to 6 digits 
+pad_tract <- function(x) {
+  # Clean out decimals and scientific notation first
+  clean <- format(x, scientific = FALSE, trim = TRUE)
+  clean <- str_replace(clean, "\\.0$", "")
+  # Pad to 6 digits
+  str_pad(clean, width = 6, side = "left", pad = "0")
+}
+
+fix_fips_format <- function(x) {
+  format(as.numeric(x), scientific = FALSE, trim = TRUE)
+}
+
+#Population percentage 
+read_csv(file.path(output_dir, "dc_black_population_percentage_1960_2020.csv")) %>%
+  rename(geographic_id = nhgiscode, tract_id = tracta, location_name = tract_name) %>%
+  mutate(tract_join_id = pad_tract(tract_id)) %>%
+  write_csv(file.path(output_dir, "dc_black_population_percentage_1960_2020_standard.csv"))
+
+
+#Population change 
+read_csv(file.path(output_dir, "dc_black_population_change_1960_2020.csv")) %>%
+  rename(geographic_id = nhgiscode, tract_id = tracta, location_name = tract_name) %>%
+  mutate(tract_join_id = pad_tract(tract_id)) %>%
+  write_csv(file.path(output_dir, "dc_black_population_change_1960_2020_standard.csv"))
+
+
+#Segregation 
+read_csv(file.path(output_dir, "dc_black_segregation_categories.csv")) %>%
+  rename(geographic_id = nhgiscode, tract_id = tracta, location_name = tract_name) %>%
+  mutate(tract_join_id = pad_tract(tract_id)) %>%
+  write_csv(file.path(output_dir, "dc_black_segregation_categories_standard.csv"))
+
+
+#Age/sex 
+read_csv(file.path(output_dir, "dc_age_sex_total_1960_2020.csv")) %>%
+  mutate(tract_join_id = pad_tract(tract_id)) %>%
+  write_csv(file.path(output_dir, "dc_age_sex_total_1960_2020_standard.csv"))
+
+
+#Income distributions 
+read_csv(file.path(output_dir, "dc_income_distributions_1960_2020.csv")) %>%
+  mutate(tract_join_id = pad_tract(tract_id)) %>%
+  write_csv(file.path(output_dir, "dc_income_distributions_1960_2020_standard.csv"))
+
+
+# Income metrics 
+read_csv(file.path(output_dir, "dc_income_metrics_1960_2020.csv")) %>%
+  mutate(tract_join_id = pad_tract(tract_id)) %>%
+  
+ 
+  mutate(fips_full = fix_fips_format(tract_join_id)) %>% 
+  
+  write_csv(file.path(output_dir, "dc_income_metrics_1960_2020_standard.csv"))
+
+
+#7. Education 
+read_csv(file.path(output_dir, "dc_education_total_1960_2020.csv")) %>%
+  mutate(tract_join_id = pad_tract(tract_id)) %>%
+  write_csv(file.path(output_dir, "dc_education_total_1960_2020_standard.csv"))
+
+
+
+#Crime tract file
+read_csv(file.path(output_dir, "dc_crime_tract_2010_2020.csv")) %>%
+  rename(tract_join_id = CENSUS_TRACT) %>%
+  write_csv(file.path(output_dir, "dc_crime_tract_2010_2020_standard.csv"))
+
+
+
+#Verification
+cat("\n--- VERIFICATION: tract_join_id samples across files ---\n")
+files_to_check <- c(
+  "dc_black_population_percentage_1960_2020_standard.csv",
+  "dc_age_sex_total_1960_2020_standard.csv",
+  "dc_income_metrics_1960_2020_standard.csv",
+  "dc_education_total_1960_2020_standard.csv",
+  "dc_crime_tract_2010_2020_standard.csv"
+)
+
+for (f in files_to_check) {
+  df <- read_csv(file.path(output_dir, f), show_col_types = FALSE)
+  sample_ids <- head(unique(df$tract_join_id), 3)
+  cat(sprintf("  %-55s tract_join_id samples: %s\n", f, paste(sample_ids, collapse = ", ")))
+}
+```
+
+
+```{r}
+library(tidyverse)
+
+final_dir <- "Cleaned_data_EDJones/Final"
+files_to_fix <- c(
+  "dc_black_population_percentage_1960_2020_standard.csv",
+  "dc_black_population_change_1960_2020_standard.csv",
+  "dc_black_segregation_categories_standard.csv",
+  "dc_education_total_1960_2020_standard.csv",
+  "dc_income_metrics_1960_2020_standard.csv",
+  "dc_crime_tract_2010_2020_standard.csv"
+)
+
+for (f in files_to_fix) {
+  fpath <- file.path(final_dir, f)
+  
+  # Read EVERYTHING as character to prevent scientific notation
+  df <- read_csv(fpath, col_types = cols(.default = "c")) %>%
+    mutate(
+      # Ensure fips_full is exactly 11 digits (state 11 + county 001 + 6-digit tract)
+      # We use tract_join_id because it's already padded to 6 digits
+      fips_full = paste0("11001", tract_join_id)
+    )
+  
+  # Write it back
+  write_csv(df, fpath)
+  cat("Successfully locked FIPS as text in:", f, "\n")
+}
+```
+
+```{r}
+# Final Income Geometry Repair
+dc_tracts_geo <- tracts(state = "DC", year = 2020, cb = TRUE) %>%
+  mutate(fips_full = paste0(STATEFP, COUNTYFP, TRACTCE))
+
+income_df <- read_csv(file.path(final_dir, "dc_income_metrics_1960_2020_standard.csv"), 
+                      col_types = cols(fips_full = "c"))
+
+income_geo <- income_df %>%
+  left_join(dc_tracts_geo, by = "fips_full") %>%
+  st_as_sf()
+
+cat("Income Match Count:", sum(!is.na(st_dimension(income_geo))), "\n")
+```
+
+
+```{r}
+library(tidyverse)
+
+# Fix percentage file only
+fpath <- file.path("Cleaned_data_EDJones", "dc_black_population_percentage_1960_2020_standard.csv")
+read_csv(fpath, show_col_types = FALSE) %>%
+  mutate(
+    black_percent = if_else(is.na(black_percent) & total_population == 0, 0, black_percent)
+  ) %>%
+  write_csv(fpath)
+cat("Fixed: dc_black_population_percentage_1960_2020_standard.csv\n")
+
+# Fix change file only
+fpath <- file.path("Cleaned_data_EDJones", "dc_black_population_change_1960_2020_standard.csv")
+read_csv(fpath, show_col_types = FALSE) %>%
+  mutate(
+    black_percent = if_else(is.na(black_percent) & total_population == 0, 0, black_percent)
+  ) %>%
+  write_csv(fpath)
+cat("Fixed: dc_black_population_change_1960_2020_standard.csv\n")
+
+# Fix segregation file — this one has segregation_category too
+fpath <- file.path("Cleaned_data_EDJones", "dc_black_segregation_categories_standard.csv")
+read_csv(fpath, show_col_types = FALSE) %>%
+  mutate(
+    black_percent = if_else(is.na(black_percent) & total_population == 0, 0, black_percent),
+    segregation_category = if_else(
+      total_population == 0, "0-25%", segregation_category
+    )
+  ) %>%
+  write_csv(fpath)
+cat("Fixed: dc_black_segregation_categories_standard.csv\n")
+
+```
+
+
+
+
+```{r}
+fpath <- file.path("Cleaned_data_EDJones", "dc_income_metrics_1960_2020_standard.csv")
+read_csv(fpath, show_col_types = FALSE) %>%
+  mutate(across(
+    c(pct_under_10k, pct_10k_to_15k, pct_15k_to_25k, pct_over_25k,
+      low_income_share, middle_income_share, high_income_share),
+    ~ if_else(is.na(.) & total_households == 0, 0, .)
+  )) %>%
+  write_csv(fpath)
+cat("Fixed: dc_income_metrics_1960_2020_standard.csv\n")
+```
+
+```{r}
+library(tidyverse)
+library(stringr)
+
+input_dir <- "Cleaned_data_EDJones"
+output_dir <- "Cleaned_data_EDJones/Final"
+
+# 1. Fix Income Distributions
+read_csv(file.path(input_dir, "dc_income_distributions_1960_2020.csv"), show_col_types = FALSE) %>%
+  mutate(
+    # Create fips_full from geographic_id if fips_full doesn't exist yet
+    fips_full = str_pad(as.character(geographic_id), width = 11, side = "left", pad = "0"),
+    tract_join_id = str_pad(as.character(tract_id), width = 6, side = "left", pad = "0")
+  ) %>%
+  write_csv(file.path(output_dir, "dc_income_distributions_1960_2020_standard.csv"))
+
+# 2. Fix Income Metrics
+read_csv(file.path(input_dir, "dc_income_metrics_1960_2020.csv"), show_col_types = FALSE) %>%
+  mutate(
+    fips_full = str_pad(as.character(geographic_id), width = 11, side = "left", pad = "0"),
+    tract_join_id = str_pad(as.character(tract_id), width = 6, side = "left", pad = "0")
+  ) %>%
+  write_csv(file.path(output_dir, "dc_income_metrics_1960_2020_standard.csv"))
+
+cat("Standardized files created with 11-digit FIPS codes.\n")
+```
+
+
+```{r}
+
+```
+
+
+```{r}
+library(tidyverse)
+library(janitor)
+library(tigris)
+library(sf)
+
+# Check actual column names and sample values
+crime_check <- read_csv(
+  file.path(output_dir, "dc_crime_tract_2010_2020_standard.csv"),
+  show_col_types = FALSE
+)
+
+cat("Crime tract columns:", names(crime_check), "\n")
+cat("Sample tract_join_id values:\n")
+print(head(crime_check$tract_join_id))
+
+cat("\nPop file tract_join_id samples (2010):\n")
+pop_check <- read_csv(
+  file.path(output_dir, "dc_black_population_percentage_1960_2020_standard.csv"),
+  show_col_types = FALSE
+) %>% filter(year == 2010)
+
+print(head(pop_check$tract_join_id))
+cat("Match count:", sum(crime_check$tract_join_id %in% pop_check$tract_join_id), "\n")
+```
+
+
+```{r}
+library(tidyverse)
+library(tigris)
+library(sf)
+
+options(tigris_use_cache = TRUE)
+
+dc_tracts_geo <- tracts(state = "DC", year = 2010, cb = FALSE) %>%
+  select(fips_full = GEOID10, geometry) %>%
+  mutate(fips_full = as.character(fips_full))
+
+cat("Tract boundaries loaded:", nrow(dc_tracts_geo), "tracts\n")
+print(head(dc_tracts_geo))
+```
+
+```{r}
+output_dir <- "Cleaned_data_EDJones/Final"
+
+# Files to add geometry to
+tract_files <- c(
+  "dc_black_segregation_categories_standard.csv",
+  "dc_black_population_percentage_1960_2020_standard.csv",
+  "dc_black_population_change_1960_2020_standard.csv",
+  "dc_income_metrics_1960_2020_standard.csv",
+  "dc_education_total_1960_2020_standard.csv",
+  "dc_crime_tract_2010_2020_standard.csv"
+)
+
+for (fname in tract_files) {
+  fpath <- file.path(output_dir, fname)
+  
+  # 1. Read the data and FORCE 11-digit format (do NOT remove leading zero)
+  df <- read_csv(fpath, show_col_types = FALSE) %>%
+    mutate(fips_full = str_pad(as.character(fips_full), width = 11, side = "left", pad = "0"))
+  
+  # 2. Join geometry on the matching 11-digit fips_full
+  df_geo <- df %>%
+    left_join(dc_tracts_geo, by = "fips_full") %>%
+    st_as_sf()
+  
+  # 3. Export as GeoJSON
+  geojson_name <- str_replace(fname, "\\.csv$", ".geojson")
+  geojson_path <- file.path(output_dir, geojson_name)
+  
+  # Only write if there's actually a geometry column to save
+  st_write(df_geo, geojson_path, delete_dsn = TRUE, quiet = TRUE)
+  
+  # 4. Verify match count
+  matched <- sum(!is.na(st_dimension(df_geo)))
+  cat(sprintf("✅ %s — %d rows matched to geometry\n", geojson_name, matched))
+}
+  
+```
+
+
+```{r}
+# Check your CSV format (should be 11 digits)
+head(df$fips_full)
+
+# Check the Shapefile format (this is the mystery guest)
+head(dc_tracts_geo$fips_full)
+```
+
+
+```{r}
+library(sf)
+library(tidyverse)
+library(tigris)
+options(tigris_use_cache = TRUE)
+
+output_dir <- "Cleaned_data_EDJones/Final"
+shapefile_dir <- file.path(output_dir, "shapefiles")
+dir.create(shapefile_dir, showWarnings = FALSE)
+
+# 1. Get the geometry (Tigris returns 11-digit FIPS by default)
+dc_tracts_geo <- tracts(state = "DC", year = 2020, cb = TRUE) %>%
+  mutate(fips_full = paste0(STATEFP, COUNTYFP, TRACTCE)) %>%
+  select(fips_full) # geometry is included automatically
+
+for (fname in geo_files) {
+  fpath <- file.path(output_dir, fname)
+  layer_name <- str_replace(fname, "\\.csv$", "")
+  
+  # 2. Read and standardize FIPS to 11 digits to match Tigris
+  df <- read_csv(fpath, show_col_types = FALSE) %>%
+    mutate(fips_full = str_pad(as.character(fips_full), width = 11, side = "left", pad = "0"))
+  
+  # 3. Join
+  df_geo <- df %>%
+    left_join(dc_tracts_geo, by = "fips_full") %>%
+    st_as_sf()
+  
+  # 4. Final verification check before writing
+  matched_count <- sum(!is.na(st_dimension(df_geo)))
+  
+  out_path <- file.path(shapefile_dir, paste0(layer_name, ".shp"))
+  st_write(df_geo, out_path, delete_dsn = TRUE, quiet = TRUE)
+  
+  cat(sprintf("✅ %s — %d rows matched to geometry\n", layer_name, matched_count))
+}
+
+cat("\nDone! All shapefiles are ready for ArcGIS in Final/shapefiles/\n")
+```
+
+
+
+```{r}
+# 1. Read the income data
+df_income <- read_csv(file.path(output_dir, "dc_income_metrics_1960_2020_standard.csv"), show_col_types = FALSE)
+
+# 2. Advanced ID Repair
+df_fixed <- df_income %>%
+  mutate(
+    # Clean the tract_id (remove decimals if they exist)
+    clean_tract = str_replace(as.character(tract_id), "\\.", ""),
+    # Modern tracts are 6 digits. 
+    # If it's "1", it needs to be "000100".
+    # If it's "2201", it needs to be "002201".
+    tract_6_digit = str_pad(clean_tract, width = 6, side = "right", pad = "0"),
+    tract_6_digit = str_pad(tract_6_digit, width = 6, side = "left", pad = "0"),
+    
+    # Reconstruct the 11-digit FIPS: 11 (DC) + 001 (DC County) + 6-digit tract
+    fips_full = paste0("11001", tract_6_digit)
+  )
+
+# 3. Join with your 2020 boundaries
+df_geo <- df_fixed %>%
+  left_join(dc_tracts_geo, by = "fips_full") %>%
+  st_as_sf()
+
+# 4. Final verification
+matched_count <- sum(!is.na(st_dimension(df_geo)))
+cat(sprintf("🎯 Progress: %d rows matched! (Goal is ~1,100+)\n", matched_count))
+
+# 5. Overwrite the shapefile
+st_write(df_geo, file.path(shapefile_dir, "dc_income_metrics_1960_2020_standard.shp"), delete_dsn = TRUE, quiet = TRUE)
+```
+
+
+
+```{r}
+library(tidyverse)
+
+geo_files <- c(
+  "dc_black_population_change_1960_2020_standard.csv",
+  "dc_black_population_percentage_1960_2020_standard.csv",
+  "dc_black_segregation_categories_standard.csv",
+  "dc_crime_tract_2010_2020_standard.csv",
+  "dc_education_total_1960_2020_standard.csv",
+  "dc_income_metrics_1960_2020_standard.csv"
+)
+
+for (fname in geo_files) {
+  df <- read_csv(file.path("Cleaned_data_EDJones/Final", fname), 
+                 show_col_types = FALSE, n_max = 1)
+  cat(sprintf("\n%s:\n", fname))
+  print(names(df))
+}
+```
+
+
+
