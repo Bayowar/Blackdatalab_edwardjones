@@ -47,3 +47,9 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+Data_raw/
+.RDataTmp
+*.RData
+flourish_exports/
+BlackDataLab_EDJones_FinalData.zip
+.RDataTmp
