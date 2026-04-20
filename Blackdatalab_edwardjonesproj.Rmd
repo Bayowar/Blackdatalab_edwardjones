@@ -492,7 +492,7 @@ dc_income_1960_clean <- dc_income_1960 %>%
   ) %>%
   rename(count = families)  # Standardize column name
 
-cat("✅ 1960 data processed:", nrow(dc_income_1960_clean), "observations\n")
+cat(" 1960 data processed:", nrow(dc_income_1960_clean), "observations\n")
 
 
 #PROCESS 1970-2000 HOUSEHOLD INCOME DATA (NHGIS Time Series)
@@ -560,7 +560,7 @@ dc_income_1970_2000 <- income_dc %>%
   ) %>%
   rename(count = households)  # Standardize column name
 
-cat("✅ 1970-2000 data processed:", nrow(dc_income_1970_2000), "observations\n")
+cat(" 1970-2000 data processed:", nrow(dc_income_1970_2000), "observations\n")
 cat("   Years:", paste(sort(unique(dc_income_1970_2000$year)), collapse = ", "), "\n")
 
 
@@ -608,7 +608,7 @@ dc_income_2010 <- dc_acs_2010 %>%
            unit, income_year, data_type, source, note) %>%
   summarise(count = sum(count, na.rm = TRUE), .groups = "drop")
 
-cat("✅ 2010 data processed:", nrow(dc_income_2010), "observations\n")
+cat(" 2010 data processed:", nrow(dc_income_2010), "observations\n")
 
 
 
@@ -655,7 +655,7 @@ dc_income_2020 <- dc_acs_2020 %>%
            unit, income_year, data_type, source, note) %>%
   summarise(count = sum(count, na.rm = TRUE), .groups = "drop")
 
-cat("✅ 2020 data processed:", nrow(dc_income_2020), "observations\n")
+cat(" 2020 data processed:", nrow(dc_income_2020), "observations\n")
 
 
 
@@ -674,7 +674,7 @@ standardize_income_dataset <- function(data) {
     data$geographic_id <- NA_character_
   }
   
-  # 2. Manually assign Location Name based on what exists
+  #  Manually assign Location Name based on what exists
   if ("tract_name" %in% cols) {
     data$location_name <- as.character(data$tract_name)
   } else if ("areaname" %in% cols) {
@@ -685,7 +685,7 @@ standardize_income_dataset <- function(data) {
     data$location_name <- paste("Tract", data$tracta)
   }
 
-  # 3. Now run the pipe for the logic that is consistent across all years
+  #  Now run the pipe for the logic that is consistent across all years
   data %>%
     mutate(
       tract_id = as.character(tracta),
@@ -741,11 +741,10 @@ dc_income_all_years <- bind_rows(
     )
   )
 
-cat("✅ Combined dataset created:", nrow(dc_income_all_years), "total observations\n")
+cat(" Combined dataset created:", nrow(dc_income_all_years), "total observations\n")
 
-# ==============================================================================
-# 8. ADD INFLATION ADJUSTMENT FOR COMPARABILITY
-# ==============================================================================
+#  ADD INFLATION ADJUSTMENT FOR COMPARABILITY
+
 
 cat("\nAdding inflation adjustment for cross-decade comparison...\n")
 
@@ -798,11 +797,11 @@ dc_income_with_inflation <- dc_income_all_years %>%
     )
   )
 
-cat("✅ Inflation adjustment applied\n")
+cat(" Inflation adjustment applied\n")
 
-# ==============================================================================
-# 9. CALCULATE INCOME DISTRIBUTION METRICS
-# ==============================================================================
+#
+#  CALCULATE INCOME DISTRIBUTION METRICS
+
 
 cat("\nCalculating income distribution metrics...\n")
 
@@ -833,22 +832,21 @@ dc_income_metrics <- dc_income_with_inflation %>%
     note = "Percentages of households in each income category. For poverty rates, use official poverty tables."
   )
 
-cat("✅ Income metrics calculated\n")
+cat("Income metrics calculated\n")
 
-# ==============================================================================
-# 10. SAVE ALL OUTPUT FILES
-# ==============================================================================
+# SAVE ALL OUTPUT FILES
+
 
 cat("\nSaving output files...\n")
 
-# 10.1 Save complete income dataset
+# Save complete income dataset
 write_csv(
   dc_income_with_inflation,
   file.path("Cleaned_data_EDJones/dc_income_distributions_1960_2020.csv")
 )
 cat("dc_income_distributions_1960_2020.csv saved\n")
 
-# 10.2 Save income metrics
+#  Save income metrics
 write_csv(
   dc_income_metrics,
   file.path("Cleaned_data_EDJones/dc_income_metrics_1960_2020.csv")
@@ -856,7 +854,7 @@ write_csv(
 cat("Cleaned_data_EDJones/dc_income_metrics_1960_2020.csv saved\n")
 View(dc_income_with_inflation)
 View(dc_income_metrics)
-# 10.3 Create and save metadata
+#  Create and save metadata
 metadata <- list(
   project_info = list(
     project_name = "DC Income Data for Edward P. Jones Literary Analysis",
@@ -899,9 +897,9 @@ write_json(
   pretty = TRUE,
   auto_unbox = TRUE
 )
-cat("✅ dc_income_metadata.json saved\n")
+cat(" dc_income_metadata.json saved\n")
 
-# 10.4 Create simple README
+# Create simple README
 readme_content <- c(
   "DC INCOME DATA (1960-2020)",
   strrep("=", 60),
@@ -929,11 +927,11 @@ readme_content <- c(
 )
 
 write_lines(readme_content, file.path("Cleaned_data_EDJones/DCINCOME_README.txt"))
-cat("✅ INCOME_README.txt saved\n")
+cat("INCOME_README.txt saved\n")
 
-# ==============================================================================
-# 11. QUALITY CHECK AND SUMMARY
-# ==============================================================================
+
+# QUALITY CHECK AND SUMMARY
+
 
 cat("\n")  
 cat(strrep("=", 60))
@@ -1114,10 +1112,10 @@ dc_poverty_final <- dc_poverty_all_years %>%
   ungroup()
 
 
-# 5. SAVE OUTPUTS
+#SAVE OUTPUTS
 
 write_csv(dc_poverty_final, file.path(output_dir, "dc_poverty_1970_2020_cleaned.csv"))
-cat("✅ Saved: dc_poverty_1970_2020_cleaned.csv\n")
+cat("Saved: dc_poverty_1970_2020_cleaned.csv\n")
 
 # Summary for console validation
 summary_stats <- dc_poverty_final %>%
@@ -1736,7 +1734,7 @@ read_csv(file.path(output_dir, "dc_income_metrics_1960_2020.csv")) %>%
   write_csv(file.path(output_dir, "dc_income_metrics_1960_2020_standard.csv"))
 
 
-#7. Education 
+#Education 
 read_csv(file.path(output_dir, "dc_education_total_1960_2020.csv")) %>%
   mutate(tract_join_id = pad_tract(tract_id)) %>%
   write_csv(file.path(output_dir, "dc_education_total_1960_2020_standard.csv"))
@@ -1871,7 +1869,7 @@ library(stringr)
 input_dir <- "Cleaned_data_EDJones"
 output_dir <- "Cleaned_data_EDJones/Final"
 
-# 1. Fix Income Distributions
+# Fix Income Distributions
 read_csv(file.path(input_dir, "dc_income_distributions_1960_2020.csv"), show_col_types = FALSE) %>%
   mutate(
     # Create fips_full from geographic_id if fips_full doesn't exist yet
@@ -1880,7 +1878,7 @@ read_csv(file.path(input_dir, "dc_income_distributions_1960_2020.csv"), show_col
   ) %>%
   write_csv(file.path(output_dir, "dc_income_distributions_1960_2020_standard.csv"))
 
-# 2. Fix Income Metrics
+# Fix Income Metrics
 read_csv(file.path(input_dir, "dc_income_metrics_1960_2020.csv"), show_col_types = FALSE) %>%
   mutate(
     fips_full = str_pad(as.character(geographic_id), width = 11, side = "left", pad = "0"),
@@ -1955,25 +1953,25 @@ tract_files <- c(
 for (fname in tract_files) {
   fpath <- file.path(output_dir, fname)
   
-  # 1. Read the data and FORCE 11-digit format (do NOT remove leading zero)
+  # Read the data and FORCE 11-digit format (don't remove leading zero)
   df <- read_csv(fpath, show_col_types = FALSE) %>%
     mutate(fips_full = str_pad(as.character(fips_full), width = 11, side = "left", pad = "0"))
   
-  # 2. Join geometry on the matching 11-digit fips_full
+  # Join geometry on the matching 11-digit fips_full
   df_geo <- df %>%
     left_join(dc_tracts_geo, by = "fips_full") %>%
     st_as_sf()
   
-  # 3. Export as GeoJSON
+  # Export as GeoJSON
   geojson_name <- str_replace(fname, "\\.csv$", ".geojson")
   geojson_path <- file.path(output_dir, geojson_name)
   
   # Only write if there's actually a geometry column to save
   st_write(df_geo, geojson_path, delete_dsn = TRUE, quiet = TRUE)
   
-  # 4. Verify match count
+  # Verify match count
   matched <- sum(!is.na(st_dimension(df_geo)))
-  cat(sprintf("✅ %s — %d rows matched to geometry\n", geojson_name, matched))
+  cat(sprintf(" %s — %d rows matched to geometry\n", geojson_name, matched))
 }
   
 ```
@@ -1998,7 +1996,7 @@ output_dir <- "Cleaned_data_EDJones/Final"
 shapefile_dir <- file.path(output_dir, "shapefiles")
 dir.create(shapefile_dir, showWarnings = FALSE)
 
-# 1. Get the geometry (Tigris returns 11-digit FIPS by default)
+# Get the geometry (Tigris returns 11-digit FIPS by default)
 dc_tracts_geo <- tracts(state = "DC", year = 2020, cb = TRUE) %>%
   mutate(fips_full = paste0(STATEFP, COUNTYFP, TRACTCE)) %>%
   select(fips_full) # geometry is included automatically
@@ -2007,22 +2005,22 @@ for (fname in geo_files) {
   fpath <- file.path(output_dir, fname)
   layer_name <- str_replace(fname, "\\.csv$", "")
   
-  # 2. Read and standardize FIPS to 11 digits to match Tigris
+  # Read and standardize FIPS to 11 digits to match Tigris
   df <- read_csv(fpath, show_col_types = FALSE) %>%
     mutate(fips_full = str_pad(as.character(fips_full), width = 11, side = "left", pad = "0"))
   
-  # 3. Join
+  # Join
   df_geo <- df %>%
     left_join(dc_tracts_geo, by = "fips_full") %>%
     st_as_sf()
   
-  # 4. Final verification check before writing
+  # Final verification check before writing
   matched_count <- sum(!is.na(st_dimension(df_geo)))
   
   out_path <- file.path(shapefile_dir, paste0(layer_name, ".shp"))
   st_write(df_geo, out_path, delete_dsn = TRUE, quiet = TRUE)
   
-  cat(sprintf("✅ %s — %d rows matched to geometry\n", layer_name, matched_count))
+  cat(sprintf(" %s — %d rows matched to geometry\n", layer_name, matched_count))
 }
 
 cat("\nDone! All shapefiles are ready for ArcGIS in Final/shapefiles/\n")
@@ -2031,10 +2029,10 @@ cat("\nDone! All shapefiles are ready for ArcGIS in Final/shapefiles/\n")
 
 
 ```{r}
-# 1. Read the income data
+# Read the income data
 df_income <- read_csv(file.path(output_dir, "dc_income_metrics_1960_2020_standard.csv"), show_col_types = FALSE)
 
-# 2. Advanced ID Repair
+# Advanced ID Repair
 df_fixed <- df_income %>%
   mutate(
     # Clean the tract_id (remove decimals if they exist)
@@ -2049,16 +2047,16 @@ df_fixed <- df_income %>%
     fips_full = paste0("11001", tract_6_digit)
   )
 
-# 3. Join with your 2020 boundaries
+# Join with your 2020 boundaries
 df_geo <- df_fixed %>%
   left_join(dc_tracts_geo, by = "fips_full") %>%
   st_as_sf()
 
-# 4. Final verification
+# Final verification
 matched_count <- sum(!is.na(st_dimension(df_geo)))
 cat(sprintf("🎯 Progress: %d rows matched! (Goal is ~1,100+)\n", matched_count))
 
-# 5. Overwrite the shapefile
+# Overwrite the shapefile
 st_write(df_geo, file.path(shapefile_dir, "dc_income_metrics_1960_2020_standard.shp"), delete_dsn = TRUE, quiet = TRUE)
 ```
 
