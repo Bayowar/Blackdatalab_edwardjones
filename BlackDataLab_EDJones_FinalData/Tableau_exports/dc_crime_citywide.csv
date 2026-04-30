@@ -1,0 +1,8 @@
+year,population,crime_rate_per_100k,source,geography
+1960,763956,2712.9,FBI UCR Crime Index,city
+1970,756510,10883.4,FBI UCR Crime Index,city
+1980,635233,10022.8,FBI UCR Crime Index,city
+1990,606900,10774.3,FBI UCR Crime Index,city
+2000,572059,7276.5,FBI UCR Crime Index,city
+2010,604912,6088.2,FBI UCR Crime Index,city
+2020,712816,3918.2622163363335,DC Open Data Crime Incidents,city
